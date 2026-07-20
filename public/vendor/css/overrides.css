@@ -228,10 +228,39 @@
 }
 
 /* Agenio's hero is tuned for short English words ("We ARE"/"CREATIVE") at a
-   fixed 120px. Our Spanish copy runs longer — scale down responsively so it
-   fits without wrapping/overflowing the left/right boxes. */
+   fixed 120px staircase (120/100/80/60/48 across its own breakpoints). Our
+   "IDEAMOS"/"IMPRIMIMOS" are longer, so a single unconditional clamp (the
+   previous approach) didn't shrink fast enough right at 992px — exactly
+   where .mid-icon .frame jumps from 220px to 303px (see rule above) — and
+   "IMPRIMIMOS" wrapped onto a second line that collided with the circle
+   (reported 2026-07-19, tablet 768–1024px). Replaced with our own staircase,
+   independently verified via Playwright at every tier (measuring the right-
+   side text's bounding box against .mid-icon's) to guarantee no wrap/overlap
+   from 390px up to 1920px, and to make the title noticeably smaller on
+   tablet/phone per that request — desktop (≥1440px) keeps the same 72px
+   it already had. */
 .wpr-banner-area .banner-content-area .section-title {
-  font-size: clamp(32px, 6vw, 72px) !important;
+  font-size: 72px !important;
+}
+@media (max-width: 1439px) {
+  .wpr-banner-area .banner-content-area .section-title {
+    font-size: 64px !important;
+  }
+}
+@media (max-width: 1199px) {
+  .wpr-banner-area .banner-content-area .section-title {
+    font-size: 52px !important;
+  }
+}
+@media (max-width: 991px) {
+  .wpr-banner-area .banner-content-area .section-title {
+    font-size: 42px !important;
+  }
+}
+@media (max-width: 767px) {
+  .wpr-banner-area .banner-content-area .section-title {
+    font-size: 28px !important;
+  }
 }
 
 /* Agenio's services grid is built for exactly 4 example services
