@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- @dsCard group="Type" name="Type · Pixel" subtitle="That That New Pixel · 4 cuts (square/round × reg/italic)" viewport="700x380" --><html><head><meta charset="utf-8"/><title>Type · Pixel</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#1E1F1E;color:#FFF8F0;font-family:'JetBrains Mono',monospace}
+  .card{width:700px;height:380px;padding:20px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end}
+  .meta{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7E7C76}
+  .acc{color:#44FF02}
+
+  /* big wordmark — square cut, the canonical 3nity lockup */
+  .word{font-family:"That That New Pixel",monospace;font-size:108px;line-height:1;letter-spacing:.02em;color:#FFF8F0;display:flex;align-items:baseline;gap:0}
+  .word .three{color:#44FF02}
+
+  /* 4 cuts grid */
+  .cuts{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;border-top:1px solid #2A2B2A;padding-top:14px}
+  .cut{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+  .cut .lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#7E7C76}
+  .cut .sample{font-size:42px;line-height:1;color:#FFF8F0}
+  .square{font-family:"That That New Pixel",monospace;font-style:normal}
+  .square-i{font-family:"That That New Pixel",monospace;font-style:italic}
+  .round{font-family:"That That New Pixel Round",monospace;font-style:normal}
+  .round-i{font-family:"That That New Pixel Round",monospace;font-style:italic}
+
+  .specs{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#7E7C76}
+</style></head><body>
+<div class="card">
+  <div class="head">
+    <div>
+      <div class="meta">PIXEL · <span class="acc">THAT THAT NEW PIXEL</span> · LICENSED</div>
+      <div class="word"><span class="three">3</span><span>nity</span></div>
+    </div>
+    <div class="meta" style="text-align:right;line-height:1.6">
+      4 CUTS<br/>
+      SQUARE · ROUND<br/>
+      REG · ITALIC
+    </div>
+  </div>
+
+  <div class="cuts">
+    <div class="cut">
+      <div class="sample square">3nity</div>
+      <div class="lbl">SQUARE · REG</div>
+    </div>
+    <div class="cut">
+      <div class="sample square-i">3nity</div>
+      <div class="lbl">SQUARE · ITALIC</div>
+    </div>
+    <div class="cut">
+      <div class="sample round">3nity</div>
+      <div class="lbl">ROUND · REG</div>
+    </div>
+    <div class="cut">
+      <div class="sample round-i">3nity</div>
+      <div class="lbl">ROUND · ITALIC</div>
+    </div>
+  </div>
+
+  <div class="specs">
+    <span>WORDMARK · 3 REPLACES E</span>
+    <span class="acc">--font-pixel · --font-pixel-round</span>
+    <span>BITMAP · 8-BIT</span>
+  </div>
+</div></body></html>

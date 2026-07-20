@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- @dsCard group="Spacing" name="Spacing · Elevation" subtitle="Block shadow on cream · neon glow on dark" viewport="700x200" --><html><head><meta charset="utf-8"/><title>Elevation</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#FFF8F0;color:#1E1F1E;font-family:"JetBrains Mono",monospace}
+  .card{width:700px;height:200px;padding:18px 22px;box-sizing:border-box}
+  .meta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8A867E;margin-bottom:18px}
+  .row{display:flex;gap:34px}
+  .item{display:flex;flex-direction:column;gap:8px}
+  .sq{width:120px;height:84px;background:#FFF8F0;display:flex;align-items:center;justify-content:center;font-family:"Space Grotesk";font-weight:700;text-transform:uppercase;font-size:14px;letter-spacing:.04em}
+  .a{box-shadow:0 0 0 1px rgba(30,31,30,.9), 6px 6px 0 0 #1E1F1E}
+  .b{background:#1E1F1E;color:#FFF8F0;box-shadow:0 0 0 2px rgba(68,255,2,.4),0 0 32px rgba(68,255,2,.55)}
+  .c{background:#1E1F1E;color:#FFF8F0;box-shadow:0 0 0 2px rgba(220,0,115,.4),0 0 32px rgba(220,0,115,.55)}
+  .d{box-shadow:0 12px 32px rgba(0,0,0,.25)}
+  .lbl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#8A867E}
+</style></head><body>
+<div class="card">
+  <div class="meta">Elevation · blocky offset on cream · neon glow on dark</div>
+  <div class="row">
+    <div class="item"><div class="sq a">BLOCK</div><div class="lbl">--shadow-block</div></div>
+    <div class="item"><div class="sq b">LIME</div><div class="lbl">--glow-lime</div></div>
+    <div class="item"><div class="sq c">DISRUPT</div><div class="lbl">--glow-magenta</div></div>
+    <div class="item"><div class="sq d">SOFT</div><div class="lbl">--shadow-soft</div></div>
+  </div>
+</div></body></html>

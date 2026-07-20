@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Components · Badges + Glyphs" subtitle="Pills + 3 pixel glyphs (stairs/totem/rise) + circular punctuation" viewport="700x300" --><html><head><meta charset="utf-8"/><title>Badges</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#1E1F1E;color:#FFF8F0;font-family:"JetBrains Mono",monospace}
+  .card{width:700px;height:300px;padding:18px 22px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px}
+  .meta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7E7C76}
+  .acc{color:#44FF02}
+
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .b{font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:5px 10px;display:inline-flex;align-items:center;gap:6px;font-weight:500}
+  .lime{background:#44FF02;color:#1E1F1E}
+  .mag{background:#DC0073;color:#FFF8F0}
+  .cob{background:#1B2CC1;color:#FFF8F0}
+  .out{background:transparent;color:#FFF8F0;box-shadow:inset 0 0 0 1px #FFF8F0}
+  .meta-tag{background:#232423;color:#A7EA21}
+  .dot{width:6px;height:6px;border-radius:999px;background:currentColor}
+
+  /* circular punctuation */
+  .circles{display:flex;gap:14px;align-items:center}
+  .circ{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+  .c-solid{background:#44FF02}
+  .c-stripe{background:repeating-linear-gradient(45deg,#44FF02 0,#44FF02 4px,#1E1F1E 4px,#1E1F1E 8px)}
+  .c-cross{background:#1E1F1E;box-shadow:inset 0 0 0 2px #44FF02;position:relative}
+  .c-cross::before,.c-cross::after{content:"";position:absolute;background:#44FF02}
+  .c-cross::before{width:18px;height:2px;top:50%;left:50%;transform:translate(-50%,-50%)}
+  .c-cross::after{width:2px;height:18px;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+  /* pixel glyphs — secondary marks, anchor for cards / dividers / dings */
+  .glyphs{display:flex;gap:10px;align-items:flex-end}
+  .gl{width:62px;height:62px;background:#1E1F1E;display:flex;align-items:center;justify-content:center;padding:8px;box-sizing:border-box;position:relative;outline:1px solid #2A2B2A;outline-offset:-1px}
+  .gl img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;image-rendering:pixelated;filter:invert(1)}
+  .gl.lime{background:#44FF02;outline:none}
+  .gl.lime img{filter:none}
+  .gl.mag{background:#DC0073;outline:none}
+  .gl.mag img{filter:invert(1) brightness(2)}
+  .gl-lbl{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#7E7C76;margin-left:4px;line-height:1.4}
+
+  .label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#7E7C76}
+</style></head><body>
+<div class="card">
+  <div class="meta">BADGES · STATUS PILLS · <span class="acc">PIXEL GLYPHS</span> · CIRCULAR PUNCTUATION</div>
+
+  <div>
+    <div class="label" style="margin-bottom:8px">— PILLS</div>
+    <div class="row">
+      <span class="b lime"><span class="dot"></span>LIVE</span>
+      <span class="b mag">DISRUPT</span>
+      <span class="b cob">EDITORIAL</span>
+      <span class="b out">09° · DRAFT</span>
+      <span class="b meta-tag">PROJECT TYPE</span>
+      <span class="b meta-tag">YEAR · 2026</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="label" style="margin-bottom:8px">— PIXEL GLYPHS · DINGS Y ANCLAS</div>
+    <div class="glyphs">
+      <div class="gl"><img src="../brand/glyph-stairs.png" alt="stairs"/></div>
+      <div class="gl"><img src="../brand/glyph-totem.png" alt="totem"/></div>
+      <div class="gl"><img src="../brand/glyph-rise.png" alt="rise"/></div>
+      <div class="gl lime"><img src="../brand/glyph-stairs.png" alt="stairs lime"/></div>
+      <div class="gl mag"><img src="../brand/glyph-rise.png" alt="rise magenta"/></div>
+      <div class="gl-lbl">USAR COMO<br/>VIÑETAS · ANCLAS<br/>DIVISORES</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="label" style="margin-bottom:8px">— CIRCULAR PUNCTUATION</div>
+    <div class="circles">
+      <div class="circ c-solid"></div>
+      <div class="circ c-stripe"></div>
+      <div class="circ c-cross"></div>
+      <span class="label">SOLID · STRIPED · CROSSED</span>
+    </div>
+  </div>
+</div></body></html>

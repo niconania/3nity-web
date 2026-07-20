@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Components · Buttons" subtitle="Primary · disrupt · ghost · block · icon" viewport="700x200" --><html><head><meta charset="utf-8"/><title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#1E1F1E;color:#FFF8F0;font-family:"JetBrains Mono",monospace}
+  .card{width:700px;height:200px;padding:18px 22px;box-sizing:border-box}
+  .meta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7E7C76;margin-bottom:14px}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:"JetBrains Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:none;cursor:pointer;border-radius:0;display:inline-flex;align-items:center;gap:10px}
+  .b-primary{background:#44FF02;color:#1E1F1E}
+  .b-disrupt{background:#DC0073;color:#FFF8F0}
+  .b-ghost{background:transparent;color:#FFF8F0;box-shadow:inset 0 0 0 1px #FFF8F0}
+  .b-block{background:#FFF8F0;color:#1E1F1E;box-shadow:6px 6px 0 0 #44FF02}
+  .b-icon{background:#1E1F1E;color:#44FF02;box-shadow:inset 0 0 0 1px #2A2B2A;padding:14px;width:44px;height:44px;justify-content:center}
+  .lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#7E7C76;margin-top:8px}
+  .col{display:flex;flex-direction:column;align-items:flex-start}
+  .dot{width:8px;height:8px;background:currentColor;border-radius:0}
+</style></head><body>
+<div class="card">
+  <div class="meta">Buttons · sharp · monospaced labels · no rounded corners</div>
+  <div class="row">
+    <div class="col"><button class="btn b-primary"><span class="dot"></span>EXECUTE</button><div class="lbl">primary</div></div>
+    <div class="col"><button class="btn b-disrupt">DISRUPT</button><div class="lbl">disrupt</div></div>
+    <div class="col"><button class="btn b-ghost">GHOST · 09°</button><div class="lbl">ghost</div></div>
+    <div class="col"><button class="btn b-block">BLOCK</button><div class="lbl">block · cream surface</div></div>
+    <div class="col"><button class="btn b-icon"><span class="dot"></span></button><div class="lbl">icon</div></div>
+  </div>
+</div></body></html>

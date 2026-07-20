@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- @dsCard group="UI Kit — Posters" name="UI Kit · Posters" subtitle="Editorial poster surfaces · 4 variants" viewport="1280x900" -->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>3NITY · Poster UI Kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#0F100F;color:#FFF8F0;font-family:'JetBrains Mono',monospace}
+  .stage{padding:36px 28px;min-height:100vh;box-sizing:border-box}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #2A2B2A;padding-bottom:18px;margin-bottom:28px}
+  .h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:42px;text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+  .meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7E7C76}
+  .accent{color:#44FF02}
+  .grid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:32px;max-width:1200px;margin:0 auto}
+  .item{display:flex;flex-direction:column;gap:14px}
+  .label{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7E7C76}
+  .label .num{color:#44FF02;font-family:'VT323',monospace;font-size:20px;letter-spacing:.05em;line-height:1}
+  .switch{display:flex;gap:8px}
+  .swbtn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;background:transparent;color:#FFF8F0;border:1px solid #2A2B2A;cursor:pointer}
+  .swbtn.on{background:#44FF02;color:#1E1F1E;border-color:#44FF02}
+  .frame-wrap{align-self:center}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="Components.jsx"></script>
+<script type="text/babel" src="Posters.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+function App(){
+  const [size, setSize] = useState('A');
+  const dims = size === 'A' ? { w: 480, h: 640 } : { w: 540, h: 960 };
+  const items = [
+    { name: 'ENERGY · LIME / TETRIS', num: '01', Comp: PosterEnergy },
+    { name: 'EDITORIAL · CREAM / META', num: '02', Comp: PosterEditorial },
+    { name: 'LAB · BLACK / SUN', num: '03', Comp: PosterLab },
+    { name: 'DISRUPT · MAGENTA / META', num: '04', Comp: PosterDisrupt },
+  ];
+  return (
+    <div className="stage">
+      <div className="head">
+        <div>
+          <div className="meta">UI KIT · POSTERS</div>
+          <div className="h1">3<span className="accent">NITY</span> / EDITORIAL POSTERS</div>
+          <div className="meta" style={{marginTop:8}}>SYSTEM 09° · 4 PRIMARY SURFACES · PRINT-READY</div>
+        </div>
+        <div className="switch">
+          <button className={`swbtn ${size==='A'?'on':''}`} onClick={()=>setSize('A')}>16:9 · A</button>
+          <button className={`swbtn ${size==='V'?'on':''}`} onClick={()=>setSize('V')}>9:16 · V</button>
+        </div>
+      </div>
+      <div className="grid">
+        {items.map((it,i) => (
+          <div className="item" key={i}>
+            <div className="label"><span>{it.name}</span><span className="num">{it.num}°</span></div>
+            <div className="frame-wrap"><it.Comp width={dims.w} height={dims.h}/></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body></html>

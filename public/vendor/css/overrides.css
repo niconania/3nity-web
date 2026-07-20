@@ -1,0 +1,300 @@
+/* ---------- 3NITY brand fonts (2026-07-19) ----------
+   Agenio's style.css never actually loads Space Grotesk/Urbanist (no
+   @font-face, no CDN link anywhere in Base.astro) — every heading/body rule
+   in style.css is written as var(--font-primary)/var(--font-secondary), so
+   it was silently falling back to sans-serif. We swap in 3NITY's own
+   licensed originals (from .claude/skills/3nity-design/fonts/, copied to
+   public/fonts/) by redefining those same two variables — no need to touch
+   style.css itself.
+   - Montech V.02 = "la principal": both --font-primary and --font-secondary,
+     i.e. the workhorse used everywhere by default (headings, body, buttons,
+     nav, chips) — its 7 real weight cuts map onto Agenio's existing
+     font-weight classes (.font-normal/.font-semi-bold/base h1-h6 etc), so
+     the weight hierarchy Agenio already built in keeps working unchanged.
+   - Clesmont = "para detalles": reserved for the two standalone brand
+     moments — the hero h1 and the closing CTA h2 — the only two
+     `.section-title` elements that DON'T carry Agenio's own `.second-font`
+     opt-out class. Every other section heading already opts into
+     --font-secondary via .second-font and stays Montech.
+   - That That New Pixel (italic cut) = the "3nity™" wordmark only, header
+     + footer — matches the "pixel wordmark only, never functional text"
+     rule this project already settled on earlier. */
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montech V.02";
+  src: url("/fonts/MONTECHV02-ExtraBold.ttf") format("truetype");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clesmont";
+  src: url("/fonts/Clesmont.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "That That New Pixel";
+  src: url("/fonts/ThatThatNewPixel-ItalicSquare.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "That That New Pixel";
+  src: url("/fonts/ThatThatNewPixel-Square.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-primary: "Montech V.02", sans-serif;
+  --font-secondary: "Montech V.02", sans-serif;
+}
+
+/* Hero h1 + CTA h2 — the only two .section-title elements without Agenio's
+   own .second-font opt-out. font-weight pinned to exactly what's declared
+   above (no synthetic bolding on a display face) and font-synthesis:none as
+   a second guard against faux-italic/faux-bold distortion. */
+.section-title:not(.second-font) {
+  font-family: "Clesmont", var(--font-primary);
+  font-weight: 400 !important;
+  font-synthesis: none;
+}
+
+.logo {
+  font-family: "That That New Pixel", var(--font-primary);
+  font-style: italic;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  font-synthesis: none;
+}
+.wpr-footer-area .footer-logo-area .logo {
+  font-size: 32px;
+}
+
+/* Overrides for the literal Agenio port — placeholders for missing stock
+   photography, see CLAUDE.md. Agenio's own CSS sizes `.image-area` purely
+   from the <img>'s rendered size; since we have no img (licensing), these
+   divs need their own definite size via aspect-ratio, not height:100% —
+   height:100% against an auto-height ancestor resolves to nothing and the
+   whole card collapses. */
+.photo-placeholder {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: repeating-linear-gradient(45deg, #e5e5ea, #e5e5ea 10px, #d6d6dc 10px, #d6d6dc 20px);
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-secondary, sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B7280;
+  text-align: center;
+  padding: 8px;
+}
+
+/* Cards whose .image-area is absolutely positioned to fill the wrapper
+   (services) need the placeholder to do the same, since there's no <img>
+   establishing the wrapper's own height. */
+.service-wrapper .image-area,
+.service-wrapper .photo-placeholder,
+.testimonials-image-slider .image-area,
+.testimonials-image-slider .photo-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+.service-wrapper,
+.wpr-testimonials-area .swiper.testimonials-image-slider,
+.wpr-testimonials-area .testimonials-image-slider .swiper-slide {
+  min-height: 420px;
+}
+
+/* Agenio's own "Our Vision" headline embeds a small inline crop of the same
+   photo that later fills the pinned slider below it (sm.webp = a crop of
+   01.webp) — a literal preview, not a logo/icon. We have no real photo yet,
+   so the honest equivalent is a mini version of the same FOTO PENDIENTE
+   swatch used everywhere else, not the 3NITY isotype (which reads as a logo
+   moment, not a photo teaser). Sized down from the base 100%-width block
+   placeholder to sit inline mid-sentence like Agenio's own img did. */
+.photo-placeholder.inline-teaser {
+  display: inline-flex;
+  width: 120px;
+  aspect-ratio: 4 / 3;
+  vertical-align: middle;
+  margin: -15px 6px 0 10px;
+  font-size: 9px;
+  padding: 4px;
+}
+@media (max-width: 576px) {
+  .photo-placeholder.inline-teaser {
+    width: 72px;
+    margin: -6px 4px 0 6px;
+    font-size: 7px;
+  }
+}
+
+/* Our Vision's pinned project slider (.wpr-video-pin) sizes .image-area/
+   .video-img from an explicit 100%/100% chain rooted at 100vh — our
+   placeholder already gets width/height:100% inline, this just neutralizes
+   the base .photo-placeholder aspect-ratio so it doesn't fight that chain. */
+.wpr-project-area .image-area .photo-placeholder {
+  aspect-ratio: auto;
+}
+
+/* Agenio's center-hero.webp/svg is actually two nested shapes baked into one
+   image: a barely-rounded square (rx=24 of 303px) behind a perfect circle
+   (rx=151.5, i.e. a full circle) of the same size — the square only peeks out
+   at the four corners. Since we swapped the image for the animated 3NITY
+   logo, rebuild that exact two-layer frame in CSS instead of a plain circle. */
+.wpr-banner-area .mid-icon .frame {
+  display: block;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 18px;
+  background: #FAFAFC;
+  border: 1px dashed rgba(67, 67, 67, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.wpr-banner-area .mid-icon .inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px dashed rgba(67, 67, 67, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wpr-banner-area .mid-icon .inner img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+}
+@media (min-width: 992px) {
+  .wpr-banner-area .mid-icon .frame {
+    width: 303px;
+    height: 303px;
+    border-radius: 24px;
+  }
+}
+
+/* Agenio's hero is tuned for short English words ("We ARE"/"CREATIVE") at a
+   fixed 120px. Our Spanish copy runs longer — scale down responsively so it
+   fits without wrapping/overflowing the left/right boxes. */
+.wpr-banner-area .banner-content-area .section-title {
+  font-size: clamp(32px, 6vw, 72px) !important;
+}
+
+/* Agenio's services grid is built for exactly 4 example services
+   (flex-basis: 25%, ghost number at 200px tuned for that column width).
+   3NITY only has 3 real services, so 25% left a dead 4th column of empty
+   space (see CLAUDE.md/screenshots, 2026-07-19). Re-tuned to 3 even columns
+   at every breakpoint, with the ghost number scaled up ~4/3 at each tier so
+   it keeps filling the same proportion of the now-wider column instead of
+   shrinking relative to it. */
+.wpr-services-area .section-bottom-content .service-wrapper {
+  flex-basis: 33.333%;
+  min-height: 620px;
+}
+.wpr-services-area .section-bottom-content .service-wrapper .content .mid h2 {
+  font-size: 264px;
+  font-family: "That That New Pixel", var(--font-primary);
+  font-style: normal;
+  font-weight: 400 !important;
+  font-synthesis: none;
+}
+@media (max-width: 1439px) and (min-width: 1200px) {
+  .wpr-services-area .section-bottom-content .service-wrapper {
+    min-height: 580px;
+  }
+  .wpr-services-area .section-bottom-content .service-wrapper .content .mid h2 {
+    font-size: 240px;
+  }
+}
+@media (max-width: 1200px) {
+  .wpr-services-area .section-bottom-content .service-wrapper {
+    flex-basis: 33.333%;
+    min-height: 520px;
+  }
+  .wpr-services-area .section-bottom-content .service-wrapper .content .mid h2 {
+    font-size: 170px;
+  }
+  /* Agenio's border-top here targets items that wrap onto a 2nd row in its
+     own 2-column tablet layout — we stay 3-across, so nothing wraps and this
+     would otherwise draw a stray line across the 3rd card mid-row. */
+  .wpr-services-area .section-bottom-content .service-wrapper:nth-child(3),
+  .wpr-services-area .section-bottom-content .service-wrapper:nth-child(4) {
+    border-top: none;
+  }
+}
+@media (max-width: 767px) {
+  .wpr-services-area .section-bottom-content .service-wrapper {
+    flex-basis: 100%;
+    min-height: 560px;
+  }
+  .wpr-services-area .section-bottom-content .service-wrapper .content .mid h2 {
+    font-size: 200px;
+  }
+}
+
+/* The accordion +/- glyph is set in "Font Awsome 6 Pro" (their own typo,
+   and a paid tier we don't have a license for) — swap for plain characters. */
+.accordion-button::after {
+  font-family: var(--font-primary), sans-serif !important;
+  content: "+" !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+}
+.accordion-button:not(.collapsed)::after {
+  content: "\2212" !important;
+}
+

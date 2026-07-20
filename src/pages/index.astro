@@ -1,0 +1,734 @@
+---
+// Literal port of the Agenio template (see CLAUDE.md): real markup/classes/
+// CSS from the licensed template, 3NITY content poured in. Single page,
+// multi-page nav (about/service/work/blog) consolidated into anchors.
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+
+const w3fKey = import.meta.env.PUBLIC_W3F_KEY ?? "";
+
+const SERVICES = [
+  {
+    tag: "IMPRESIÓN 3D",
+    desc: "Piezas únicas y series cortas. Geometría que el molde no puede hacer.",
+    num: "01",
+    items: ["Modelado a medida", "Múltiples materiales", "Acabado y postprocesado", "Series cortas"],
+  },
+  {
+    tag: "MODELADO",
+    desc: "Del boceto o la referencia al archivo listo para imprimir.",
+    num: "02",
+    items: ["Escaneo y referencia", "Diseño paramétrico", "Optimización para impresión", "Revisión contigo"],
+  },
+  {
+    tag: "PROTOTIPOS",
+    desc: "Prueba la forma y el ajuste antes de comprometer el material final.",
+    num: "03",
+    items: ["Iteración rápida", "Validación de ajuste", "Múltiples versiones", "De prueba a producción"],
+  },
+];
+
+const PROCESS = [
+  { num: "01", title: "Idea", desc: "Cuéntanos qué necesitas: una foto, un boceto, o solo la idea." },
+  { num: "02", title: "Cotización", desc: "Evaluamos el modelo y respondemos por correo con precio y tiempo de entrega." },
+  { num: "03", title: "Entrega", desc: "Imprimimos, terminamos la pieza y coordinamos la entrega." },
+];
+
+const TEAM = [
+  { name: "Sara A. Oliviero", role: "Chief Marketing Officer" },
+  { name: "José S. Moreno", role: "Chief Financial Officer" },
+  { name: "Nicola A. Nania", role: "Chief Technology Officer" },
+];
+
+const WORK_SLIDES = Array.from({ length: 6 }, (_, i) => String(i + 1).padStart(2, "0"));
+
+const VISION_PROJECTS = [
+  {
+    title: "Pieza única",
+    desc: "Una geometría irrepetible, resuelta en un solo intento. Sin molde, sin mínimos.",
+    stats: [
+      { value: "1/1", label: "Piezas irrepetibles" },
+      { value: "STL · 3MF", label: "Formatos que aceptamos" },
+      { value: "24–48h", label: "Tiempo de cotización" },
+    ],
+  },
+  {
+    title: "Prototipo",
+    desc: "Prueba la forma y el ajuste antes de comprometer el material final.",
+    stats: [
+      { value: "0.1mm", label: "Resolución de capa" },
+      { value: "6+", label: "Materiales disponibles" },
+      { value: "Rápida", label: "Iteración" },
+    ],
+  },
+  {
+    title: "Serie corta",
+    desc: "De la prueba a la producción, sin comprometer el acabado.",
+    stats: [
+      { value: "Sin mínimo", label: "Lote flexible" },
+      { value: "Multi-material", label: "Impresión" },
+      { value: "Nacional", label: "Envío" },
+    ],
+  },
+];
+
+const FAQS = [
+  { q: "¿Qué archivos necesito enviar?", a: "STL o 3MF si ya tienes el modelo listo. Si no, cuéntanos la idea y te ayudamos a modelarla." },
+  { q: "¿Cuánto tarda una cotización?", a: "Respondemos por correo en 24–48 horas con precio y tiempo estimado de entrega." },
+  { q: "¿Hacen envíos fuera de la ciudad?", a: "Sí, coordinamos envío nacional. El costo se incluye en la cotización." },
+  { q: "¿Puedo pedir una pieza única, no en serie?", a: "Sí — piezas únicas, series cortas y prototipos son nuestro fuerte." },
+];
+---
+
+<Base>
+  <!-- header area start -->
+  <header class="header-style-one">
+    <div class="container">
+      <div class="header-style-one-wrapper">
+        <div class="left-area square-dot">
+          <div class="logo-area">
+            <a href="#top" class="logo">3nity<sup>™</sup></a>
+          </div>
+          <span class="square-shape top-left"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+        <nav class="main-nav-area">
+          <ul class="list-unstyled wpr-desktop-menu">
+            <li class="menu-item active"><a class="main-element" href="#top">Inicio</a></li>
+            <li class="menu-item"><a class="main-element" href="#services">Servicios</a></li>
+            <li class="menu-item"><a class="main-element" href="#trabajos">Trabajos</a></li>
+            <li class="menu-item"><a class="main-element" href="#team">Equipo</a></li>
+            <li class="menu-item"><a class="main-element" href="#contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="button-area-start square-dot">
+          <a href="#contact" class="wpr-btn btn-primary">Solicitar cotización</a>
+          <div class="menu-btn d-flex d-lg-none d-md-flex d-sm-flex" id="menu-btn">
+            <span class="line one"></span>
+            <span class="line two"></span>
+          </div>
+          <span class="square-shape top-left"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+        <div id="side-bar" class="side-bar">
+          <div class="sidebar-inner">
+            <div class="mobile-menu-main">
+              <nav class="nav-main mainmenu-nav">
+                <ul class="list-unstyled wpr-desktop-menu" id="mobile-menu">
+                  <li class="menu-item"><a class="main-element" href="#top">Inicio</a></li>
+                  <li class="menu-item"><a class="main-element" href="#services">Servicios</a></li>
+                  <li class="menu-item"><a class="main-element" href="#trabajos">Trabajos</a></li>
+                  <li class="menu-item"><a class="main-element" href="#team">Equipo</a></li>
+                  <li class="menu-item"><a class="main-element" href="#contact">Contacto</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="button-area">
+              <a href="#contact" class="wpr-btn btn-primary">Contacto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- header area end -->
+
+  <!-- wpr banner area start -->
+  <section class="wpr-banner-area" id="top">
+    <div class="container">
+      <div class="banner-content-area">
+        <div class="top-shape wow fadeIn" data-wow-delay=".7s"></div>
+        <h1 class="section-title">
+          <span class="left-area square-dot wow fadeInLeft" data-wow-delay=".7s">
+            <span class="text">IDEAMOS</span>
+            <span class="square-shape top-right"></span>
+            <span class="square-shape bottom-right"></span>
+            <span class="arrow-track right">
+              {Array.from({ length: 11 }).map(() => (
+                <span class="arrow"><img src="/vendor/images/banner/icon/arrow-right.svg" alt="" /></span>
+              ))}
+            </span>
+          </span>
+          <span class="mid-icon wow scaleIn" data-wow-delay=".7s">
+            <span class="frame">
+              <span class="inner">
+                <img id="hero-logo-anim" src="/brand/logo-animation/frame-1.png" width="150" alt="Isotipo 3NITY animado" />
+              </span>
+            </span>
+          </span>
+          <span class="right-area square-dot wow fadeInRight" data-wow-delay=".7s">
+            <span class="arrow-track right">
+              {Array.from({ length: 11 }).map(() => (
+                <span class="arrow"><img src="/vendor/images/banner/icon/arrow-left.svg" alt="" /></span>
+              ))}
+            </span>
+            <span class="text">IMPRIMIMOS</span>
+            <span class="square-shape top-left"></span>
+            <span class="square-shape bottom-left"></span>
+          </span>
+        </h1>
+        <div class="text-area wow fadeInUp" data-wow-delay="1s">
+          <p class="desc">Convertimos ideas en piezas físicas <br> con precisión técnica y acabado editorial.</p>
+          <div class="button-area">
+            <a href="#services" class="wpr-btn btn-white">Ver servicios</a>
+            <a href="#contact" class="wpr-btn btn-primary with-icon">
+              <div class="inner">
+                <div class="icon">
+                  {Array.from({ length: 6 }).map(() => (
+                    <span><img src="/vendor/images/icon/button-arrow.svg" alt="" /></span>
+                  ))}
+                </div>
+              </div>
+              Solicitar cotización
+            </a>
+          </div>
+        </div>
+        <div class="bg-shape">
+          <img src="/vendor/images/banner/shape/bg-shape.svg" alt="" />
+        </div>
+        <div class="banner-shape-area">
+          <img src="/vendor/images/banner/shape/shape-01.svg" alt="" class="one wow fadeInLeft" data-wow-delay=".2s" />
+          <img src="/vendor/images/banner/shape/shape-02.svg" alt="" class="two wow fadeInRight" data-wow-delay=".2s" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr banner area end -->
+
+  <!-- wpr about area: oculta por ahora a pedido del usuario (2026-07-18),
+       no aporta suficiente todavía debajo del hero. Marcado no visible en vez
+       de borrado para poder reactivarlo. -->
+  <!--
+  <section id="about" class="wpr-about-area mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="section-top-area">
+          <div class="section-title-area">
+            <p class="sub-title">ESTUDIO</p>
+            <h2 class="section-title second-font font-semi-bold text-normal quote">
+              El buen diseño no es una imagen — es un objeto que puedes sostener
+            </h2>
+          </div>
+        </div>
+        <div class="about-bottom-content square-dot">
+          <div class="left-area">
+            <ul>
+              <li class="border-top">
+                <p class="top-description">NUESTROS NÚMEROS HABLAN POR SÍ SOLOS. <br> 3 FRIENDS &amp; 1 MACHINE.</p>
+              </li>
+              <li class="border-top with-icon">
+                <div class="text">
+                  <h2 class="h4 title"><span class="odometer second-font font-semi-bold" data-count="3">00</span></h2>
+                  <p class="desc">Socios fundadores</p>
+                </div>
+              </li>
+              <li class="border-top with-icon">
+                <div class="text">
+                  <h2 class="h4 title"><span class="odometer second-font font-semi-bold" data-count="1">00</span></h2>
+                  <p class="desc">Máquina, infinitas piezas</p>
+                </div>
+              </li>
+              <li class="border-top with-icon">
+                <div class="text">
+                  <h2 class="h4 title"><span class="odometer second-font font-semi-bold" data-count="9">00</span>°</h2>
+                  <p class="desc">System / identidad</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="right-area">
+            <div class="image-area">
+              <div class="photo-placeholder" style="aspect-ratio: 802/700;">FOTO DEL TALLER — PENDIENTE</div>
+            </div>
+          </div>
+          <span class="square-shape top-left"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+  <!-- wpr about area end -->
+
+  <!-- wpr services area start -->
+  <section id="services" class="wpr-services-area mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="section-top-area">
+          <div class="section-title-area center-style">
+            <p class="sub-title">MUST-HAVE 3D SERVICES</p>
+            <h2 class="section-title second-font font-semi-bold text-normal wpr-text-anime-style-1">Diseñamos. Imprimimos.</h2>
+          </div>
+        </div>
+        <div class="section-bottom-content square-dot">
+          {SERVICES.map((s, i) => (
+            <div class="service-wrapper wow fadeInRight" data-wow-delay={`${(i + 1) * 0.2}s`}>
+              <div class="image-area">
+                <div class="photo-placeholder" style="aspect-ratio: 4/3;">FOTO PENDIENTE</div>
+              </div>
+              <div class="content">
+                <div class="top">
+                  <p class="tag">{s.tag}</p>
+                  <p class="desc">{s.desc}</p>
+                </div>
+                <div class="mid">
+                  <h2>{s.num}</h2>
+                </div>
+                <div class="bottom">
+                  <ul>
+                    {s.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+          <span class="square-shape top-left"></span>
+          <span class="square-shape top-right"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr services area end -->
+
+  <!-- wpr project area start (Our Vision — manifesto + pinned scroll-grow
+       project slider, literal architecture from Agenio's .wpr-video-pin,
+       driven by main.js containerResize()/featureProjectHover(), see
+       CLAUDE.md). Placeholder photos until real work photography exists. -->
+  <section class="wpr-project-area mb--16">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="space"></div>
+        <div class="floating-content">
+          <div class="section-title-area center-style">
+            <p class="sub-title bg-white">OUR VISION</p>
+            <h2 class="section-title second-font font-semi-bold text-normal">
+              Nace de un impulso <br>
+              <span>de solucionar <span><span class="photo-placeholder inline-teaser">FOTO</span></span> sin</span> <br>
+              tener que pedirlo
+            </h2>
+            <p class="desc">Buscamos crear cosas que las personas no quieren, sino que las necesitan.</p>
+          </div>
+        </div>
+        <div class="wpr-video-pin">
+          <div class="wpr-video-wrapper">
+            <div class="swiper project-slider">
+              <div class="swiper-wrapper">
+                {VISION_PROJECTS.map((p) => (
+                  <div class="swiper-slide">
+                    <div class="slide feature-project">
+                      <div class="image-area">
+                        <div class="photo-placeholder video-img" style="width:100%;height:100%;">FOTO PENDIENTE</div>
+                        <img src="/vendor/images/portfolio/shape-top-left.svg" alt="" class="shape top-left-shape" />
+                        <img src="/vendor/images/portfolio/shape-top-right.svg" alt="" class="shape top-right-shape" />
+                      </div>
+                      <div class="slide-content">
+                        <div class="product-intro">
+                          <div class="top">
+                            <h2 class="h3 title"><a href="#trabajos">{p.title}</a></h2>
+                            <p class="desc">{p.desc}</p>
+                          </div>
+                          <div class="bottom">
+                            <ul>
+                              {p.stats.map((s) => (
+                                <li>
+                                  <h3 class="h5">{s.value}</h3>
+                                  <p>{s.label}</p>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hover_mouse">
+                        <div class="box"></div>
+                        <a href="#trabajos">
+                          Ver trabajos
+                          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 0V13.4751H16.5083V2.53591L1.0442 18L0 16.9061L15.4144 1.49171H4.47514V0H18Z" fill="#44FF02" /></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div class="swiper-navigation">
+                <div class="swiper-btn slider-prev">
+                  <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6094 0L0.859375 13.75L0 14.6484L0.859375 15.5469L14.6094 29.2969L16.4062 27.5L3.55469 14.6484L16.4062 1.79688L14.6094 0Z" fill="#F9FAFB"></path></svg>
+                </div>
+                <div class="swiper-btn slider-next">
+                  <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.79688 0L0 1.79688L12.8516 14.6484L0 27.5L1.79688 29.2969L15.5469 15.5469L16.4062 14.6484L15.5469 13.75L1.79688 0Z" fill="#F9FAFB"></path></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr project area end -->
+
+  <!-- wpr working process area start -->
+  <section class="wpr-working-process mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="working-process-left">
+              <div class="section-title-area">
+                <p class="sub-title">PRINT LIKE US IN 3 STEPS</p>
+                <h2 class="section-title second-font font-semi-bold text-normal quote">De la idea <br> a la entrega</h2>
+              </div>
+              <div class="text-area">
+                <p class="desc">Cada paso pensado para darte claridad y una pieza en tus manos.</p>
+                <a href="#contact" class="wpr-btn btn-primary with-icon">Solicitar cotización</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="right-content-area">
+              {PROCESS.map((p) => (
+                <div class="working-process-wrapper">
+                  <div class="image-area">
+                    <div class="photo-placeholder" style="aspect-ratio: 4/3;">FOTO PENDIENTE</div>
+                  </div>
+                  <div class="content-area">
+                    <div class="number">//{p.num}</div>
+                    <div class="wrapper-content">
+                      <h3 class="title second-font h6">{p.title}</h3>
+                      <p class="desc">{p.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr working process area end -->
+
+  <!-- wpr marquee area start -->
+  <section class="wpr-marquee-area mb--16">
+    <div class="container">
+      <div class="section-inner overflow-hidden border-1">
+        <div class="text-wrapper first-text">
+          <div class="text-split scrollingtext-1">
+            <h2 class="title">
+              {Array.from({ length: 12 }).map(() => (
+                <>PRECISIÓN <span><img src="/vendor/images/icon/black-right.svg" alt="" /></span> </>
+              ))}
+            </h2>
+          </div>
+        </div>
+        <div class="text-wrapper">
+          <div class="text-split scrollingtext-2">
+            <h2 class="title">
+              {Array.from({ length: 12 }).map(() => (
+                <>MATERIA <span><img src="/vendor/images/icon/black-left.svg" alt="" /></span> </>
+              ))}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr marquee area end -->
+
+  <!-- wpr team area start -->
+  <section id="team" class="wpr-team-area mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="content-area">
+          <div class="section-title-area center-style">
+            <p class="sub-title">THE MINDS BEHIND 3NITY</p>
+            <h2 class="section-title second-font font-semi-bold text-normal quote">Las mentes <br> detrás de 3NITY</h2>
+          </div>
+          <div class="section-bottom-inner">
+            <div class="row g-24">
+              {TEAM.map((m, i) => (
+                <div class={`col-xl-4 col-md-6 wow ${i % 2 === 0 ? "fadeInDown" : "fadeInUp"}`} data-wow-delay={`${(i + 1) * 0.2}s`}>
+                  <div class:list={["team-wrapper", { down: i % 2 !== 0 }]}>
+                    <div class="image-area">
+                      <div class="photo-placeholder" style="aspect-ratio: 1;">FOTO PENDIENTE</div>
+                    </div>
+                    <div class="author-area">
+                      <h3 class="title h6">{m.name}</h3>
+                      <p class="designation">{m.role}</p>
+                      <div class="social">
+                        <ul>
+                          <li><a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/vendor/images/team/instagram.svg" alt="" /></a></li>
+                          <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/vendor/images/team/linkedin.svg" alt="" /></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr team area end -->
+
+  <!-- wpr testimonials area start (repurposed as featured-work carousel) -->
+  <section id="trabajos" class="wpr-testimonials-area mb--16">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="section-title-area center-style">
+          <p class="sub-title">FEATURED WORK</p>
+          <h2 class="section-title second-font font-semi-bold text-normal">Trabajos destacados</h2>
+        </div>
+        <div class="swiper testimonials-image-slider">
+          <div class="swiper-wrapper">
+            {WORK_SLIDES.map((n) => (
+              <div class="swiper-slide">
+                <div class="image-area">
+                  <div class="photo-placeholder" style="width:100%;height:100%;">PIEZA / {n}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="swiper testimonials-content-slider">
+          <div class="swiper-wrapper">
+            {WORK_SLIDES.map((n) => (
+              <div class="swiper-slide">
+                <div class="testimonials-content">
+                  <div class="top">
+                    <h2 class="title h5">Pieza / {n}</h2>
+                    <p class="desc">Foto pendiente — próximamente en esta galería.</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="swiper-navigation">
+          <div class="swiper-btn swiper-btn-prev">
+            <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6094 0L0.859375 13.75L0 14.6484L0.859375 15.5469L14.6094 29.2969L16.4062 27.5L3.55469 14.6484L16.4062 1.79688L14.6094 0Z" fill="#F9FAFB"></path></svg>
+          </div>
+          <div class="swiper-btn swiper-btn-next">
+            <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.79688 0L0 1.79688L12.8516 14.6484L0 27.5L1.79688 29.2969L15.5469 15.5469L16.4062 14.6484L15.5469 13.75L1.79688 0Z" fill="#F9FAFB"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr testimonials area end -->
+
+  <!-- wpr faq area start -->
+  <section class="wpr-faq-area mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="section-content-area">
+          <div class="section-title-area center-style">
+            <p class="sub-title">FAQ</p>
+            <h2 class="section-title second-font font-semi-bold text-normal">Preguntas frecuentes</h2>
+          </div>
+          <div class="accordion-one" id="accordionExample2">
+            {FAQS.map((item, i) => (
+              <div class="accordion-item">
+                <h2 class="accordion-header" id={`heading${i}`}>
+                  <button class:list={["accordion-button", { collapsed: i !== 0 }]} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${i}`} aria-expanded={i === 0} aria-controls={`collapse${i}`}>
+                    {item.q}
+                  </button>
+                </h2>
+                <div id={`collapse${i}`} class:list={["accordion-collapse", "collapse", { show: i === 0 }]} role="region" aria-labelledby={`heading${i}`} data-bs-parent="#accordionExample2">
+                  <div class="accordion-body">
+                    <p class="desc">{item.a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr faq area end -->
+
+  <!-- wpr cta area start -->
+  <section class="wpr-cta-area">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="section-title-area">
+          <h2 class="section-title">Empecemos <br> tu proyecto</h2>
+        </div>
+        <div class="section-bottom-shape">
+          <span class="tag left">HECHO A MANO</span>
+          <span class="tag right">ENTREGA LOCAL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr cta area end -->
+
+  <!-- wpr contact area start -->
+  <section id="contact" class="wpr-contact-area mb--16">
+    <div class="container">
+      <div class="section-inner">
+        <div class="left-content-area">
+          <div class="get-in-touch">
+            <p class="sub-title">CONTACTO</p>
+            <ul>
+              <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            </ul>
+          </div>
+          <div class="location-area">
+            <p class="sub-title">ESTUDIO</p>
+            <ul>
+              <li>
+                <h2 class="h4">Venezuela</h2>
+                <p>Cotizamos y coordinamos entrega por correo — sin oficina pública todavía.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="contact-form-area">
+          <form id="contact-form" novalidate data-fallback-email={site.email}>
+            <input type="hidden" name="access_key" value={w3fKey} />
+            <input type="hidden" name="subject" value="Nueva solicitud — 3NITY" />
+            <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" />
+
+            <div class="single-input">
+              <label for="name">/TU NOMBRE</label>
+              <input type="text" id="name" name="name" placeholder="Escribe tu nombre completo" required autocomplete="name" />
+            </div>
+            <div class="single-input">
+              <label for="email">/TU CORREO</label>
+              <input type="email" id="email" name="email" placeholder="Escribe tu correo" required autocomplete="email" />
+            </div>
+            <div class="single-input">
+              <label for="project_type">/TIPO DE PROYECTO</label>
+              <select id="project_type" name="project_type" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="pieza-unica">Pieza única</option>
+                <option value="prototipo">Prototipo</option>
+                <option value="serie">Serie</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="single-input last">
+              <label for="message">/CUÉNTANOS DEL PROYECTO</label>
+              <textarea id="message" name="message" placeholder="Déjanos tu mensaje" required></textarea>
+            </div>
+            <div class="form-btn-area">
+              <button type="submit" class="wpr-btn">Enviar solicitud</button>
+            </div>
+            <div id="form-messages"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr contact area end -->
+
+  <!-- wpr footer area start -->
+  <footer class="wpr-footer-area">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="footer-top">
+          <ul>
+            <li><a href="#services">Servicios</a></li>
+            <li class="square-dot"></li>
+            <li><a href="#trabajos">Trabajos</a></li>
+            <li class="square-dot"></li>
+            <li><a href="#team">Equipo</a></li>
+            <li class="square-dot"></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-logo-area square-dot">
+          <a href="#top" class="logo">3nity<sup>™</sup></a>
+          <span class="square-shape top-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+        <div class="copyright-area">
+          <div class="left-social-area">
+            <ul>
+              <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            </ul>
+          </div>
+          <p class="copyright">© {new Date().getFullYear()} 3NITY — Venezuela. Todos los derechos reservados.</p>
+          <button class="scroll-top-btn">
+            Back to Top
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3.29688L7.64062 3.64062L1.39062 9.89062L2.10938 10.6094L8 4.71875L13.8906 10.6094L14.6094 9.89062L8.35938 3.64062L8 3.29688Z" fill="black"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- wpr footer area end -->
+</Base>
+
+<script>
+  // Stop-motion logo animation — 8 frames, 0.1s each, looping (see CLAUDE.md).
+  const FRAME_COUNT = 8;
+  const FRAME_MS = 100;
+  const img = document.getElementById("hero-logo-anim") as HTMLImageElement | null;
+
+  if (img) {
+    const frames = Array.from(
+      { length: FRAME_COUNT },
+      (_, i) => `/brand/logo-animation/frame-${i + 1}.png`,
+    );
+    frames.forEach((src) => {
+      const preload = new Image();
+      preload.src = src;
+    });
+
+    let i = 0;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReducedMotion) {
+      setInterval(() => {
+        i = (i + 1) % FRAME_COUNT;
+        img.src = frames[i];
+      }, FRAME_MS);
+    }
+  }
+</script>
+
+<script>
+  // "Our Vision" pinned photo grows out from the exact center of the
+  // viewport (main.js containerResize(), transformOrigin: center center) —
+  // which sits right on top of the sticky headline (.floating-content,
+  // z-index:-1, top:32.5%). Agenio's own CSS never fades that headline out,
+  // so mid-transition the small growing placeholder and the small inline
+  // "FOTO" teaser inside the headline are both on screen at once and read as
+  // two competing photos (reported 2026-07-19). Cross-fading the headline
+  // out over the same approach distance main.js already uses for the pin
+  // (one full viewport height before "top top") makes it read as a single
+  // photo taking over, instead of two placeholders overlapping.
+  window.addEventListener("load", () => {
+    const gsapGlobal = (window as any).gsap;
+    const ScrollTriggerGlobal = (window as any).ScrollTrigger;
+    if (!gsapGlobal || !ScrollTriggerGlobal) return;
+    if (window.innerWidth <= 768) return; // matches main.js's own pin gate
+
+    const floatingContent = document.querySelector(".wpr-project-area .floating-content");
+    const pinWrap = document.querySelector(".wpr-video-pin");
+    if (!floatingContent || !pinWrap) return;
+
+    gsapGlobal.registerPlugin(ScrollTriggerGlobal);
+    gsapGlobal.to(floatingContent, {
+      opacity: 0,
+      ease: "power1.in",
+      scrollTrigger: {
+        trigger: pinWrap,
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+      },
+    });
+  });
+</script>

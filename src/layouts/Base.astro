@@ -1,0 +1,66 @@
+---
+// Literal port of the Agenio template (see CLAUDE.md) — loads the template's
+// own compiled CSS/JS as-is, content swapped for 3NITY's.
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "3NITY — Impresión 3D, modelado y prototipos",
+  description = "3 friends & 1 machine. Estudio de diseño e impresión 3D en Venezuela. Cotiza tu pieza, prototipo o serie.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_VE" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preload" href="/vendor/css/plugins/swiper.min.css" as="style" />
+    <link rel="preload" href="/vendor/css/vendor/bootstrap.min.css" as="style" />
+    <link rel="preload" href="/vendor/css/style.css" as="style" />
+
+    <link rel="stylesheet" href="/vendor/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="/vendor/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="/vendor/css/vendor/animate.css" />
+    <link rel="stylesheet" href="/vendor/css/plugins/fontawesome.min.css" />
+    <link rel="stylesheet" href="/vendor/css/plugins/nice-select.css" />
+    <link rel="stylesheet" href="/vendor/css/plugins/aos.css" />
+    <link rel="stylesheet" href="/vendor/css/plugins/odometer.css" />
+    <link rel="stylesheet" href="/vendor/css/plugins/metismenu.css" />
+    <link rel="stylesheet" href="/vendor/css/style.css" />
+    <link rel="stylesheet" href="/vendor/css/overrides.css" />
+  </head>
+  <body class="home-bg main-home onepage overflow-x-visible">
+    <slot />
+
+    <script is:inline defer src="/vendor/js/plugins/jquery.min.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/bootstrap.min.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/metismenu.js"></script>
+    <script is:inline defer src="/vendor/js/vendor/jqueryui.js"></script>
+    <script is:inline defer src="/vendor/js/vendor/waypoint.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/swiper.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/gsap.min.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/scrolltigger.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/smoothscroll.js"></script>
+    <script is:inline defer src="/vendor/js/vendor/split-type.js"></script>
+    <script is:inline defer src="/vendor/js/splittext-shim.js"></script>
+    <script is:inline defer src="/vendor/js/vendor/wow.js"></script>
+    <script is:inline defer src="/vendor/js/plugins/odometer.js"></script>
+    <script is:inline defer src="/vendor/js/contact-form-web3forms.js"></script>
+    <script is:inline defer src="/vendor/js/main.js"></script>
+  </body>
+</html>

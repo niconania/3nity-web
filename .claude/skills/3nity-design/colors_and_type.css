@@ -1,0 +1,304 @@
+/* ============================================================
+   3NITY — COLORS & TYPE
+   System: 09° / Editorial Agency — visual system adapted from the
+   Agenio template (licensed by the studio), see CLAUDE.md.
+   ============================================================ */
+
+/* ---------- WEBFONTS ----------
+   · Space Grotesk (display/headings) — self-hosted via @fontsource, OFL licensed
+   · Urbanist      (body/labels)      — self-hosted via @fontsource, OFL licensed
+   · That That New Pixel (pixel)      → fonts/ThatThatNewPixel-*.ttf · 4 cuts
+     — licensed original, reserved EXCLUSIVELY for the "3nity" wordmark and
+     small decorative accents. Never used for functional text.
+   Clesmont/Montech V.02 font files remain in fonts/ (still licensed to the
+   studio) but are no longer referenced — kept in case a future direction
+   reverts to them. */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* That That New Pixel — licensed original, wordmark-only. 4 variants:
+   default = Square / regular. Use font-style: italic for italics.
+   Use class .pixel-round (or font-family below) to switch to the round-corner cut. */
+@font-face {
+  font-family: "That That New Pixel";
+  src: url("/fonts/ThatThatNewPixel-Square.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "That That New Pixel";
+  src: url("/fonts/ThatThatNewPixel-ItalicSquare.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "That That New Pixel Round";
+  src: url("/fonts/ThatThatNewPixel-Round.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "That That New Pixel Round";
+  src: url("/fonts/ThatThatNewPixel-ItalicRound.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ============ COLOR — BRAND PRIMARIES (Agenio's exact values) ============ */
+  --tn-lime:           #98FF03;   /* Agenio --color-primary */
+  --tn-lime-soft:      #C3FF66;   /* lighter tint, gradients */
+  --tn-magenta:        #DC0073;   /* 3NITY-only accent, founder swatch (Sara) */
+  --tn-cobalt:         #1B2CC1;   /* 3NITY-only accent, founder swatch (Nicola) */
+
+  /* ============ COLOR — STRUCTURAL NEUTRALS (Agenio's exact values) ============ */
+  --tn-black:          #1F1F25;   /* Agenio --color-secondary */
+  --tn-cream:          #F3F4F6;   /* Agenio --color-bg-1 */
+  --tn-ink:            #0B0B0B;   /* Agenio --color-bg-dark-2 */
+  --tn-paper-2:        #FFFFFF;   /* Agenio --color-white */
+  --tn-line:           rgba(255, 255, 255, 0.1);
+  --tn-line-cream:     rgba(3, 7, 18, 0.1);   /* Agenio --color-border */
+
+  /* ============ COLOR — GRADIENTS ============ */
+  --tn-grad-sun:       radial-gradient(circle at 50% 50%, #98FF03 0%, #C3FF66 55%, #6FA010 100%);
+  --tn-grad-glow:      radial-gradient(circle at 50% 50%, #98FF03 0%, rgba(152,255,3,0) 70%);
+  --tn-grad-vibrate:   linear-gradient(120deg, #98FF03 0%, #DC0073 100%);
+
+  /* ============ SEMANTIC TOKENS — DARK MODE (default) ============ */
+  --bg:                var(--tn-black);
+  --bg-2:              var(--tn-ink);
+  --surface:           #26262C;   /* Agenio --color-title, used as card surface on dark */
+  --fg:                #FFFFFF;
+  --fg-2:              #C9C9CE;
+  --fg-mute:           #9A9A9A;   /* Agenio --color-body-dark */
+  --accent:            var(--tn-lime);
+  --accent-ink:        var(--tn-black);
+  --disrupt:           var(--tn-magenta);
+  --editorial:         var(--tn-cobalt);
+  --hairline:          var(--tn-line);
+  --focus-ring:        var(--tn-lime);
+
+  /* ============ TYPE — FAMILIES ============ */
+  --font-display:      "Space Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono:         "Urbanist", ui-sans-serif, system-ui, sans-serif;   /* name kept for compat; no longer literally mono */
+  --font-pixel:        "That That New Pixel", "VT323", monospace;         /* wordmark + decorative accents ONLY */
+  --font-pixel-round:  "That That New Pixel Round", "That That New Pixel", monospace;
+
+  /* ============ TYPE — SCALE (rooted to 1rem = 16px, Agenio's generous editorial scale) ============ */
+  --t-display-xl:      clamp(48px, 9vw, 112px);
+  --t-display-lg:      clamp(36px, 6vw, 72px);
+  --t-h1:              64px;
+  --t-h2:              48px;
+  --t-h3:              28px;
+  --t-body:            17px;
+  --t-small:           14px;
+  --t-meta:            12px;     /* tagged / metadata */
+  --t-pixel-lg:        72px;
+  --t-pixel:           28px;
+
+  /* ============ TYPE — METRICS ============ */
+  --lh-tight:          1.05;
+  --lh-snug:           1.15;
+  --lh-body:           1.6;
+  --tracking-meta:     0.14em;   /* metadata, all-caps chips */
+  --tracking-label:    0.08em;
+  --tracking-display:  -0.02em;
+
+  /* ============ SPACING ============ */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* ============ RADII — soft/rounded by default (Agenio direction) ============ */
+  --r-0:    0px;    /* reserved: nothing uses sharp corners by default anymore */
+  --r-pix:  2px;    /* pixel-aware corner, wordmark-adjacent use only */
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-soft: 12px;   /* cards, inputs, chips — the default card radius */
+  --r-pill: 999px;  /* buttons, chips, circular punctuation marks */
+
+  /* ============ BORDERS ============ */
+  --bw-hair:   1px;
+  --bw-rule:   2px;
+  --bw-block:  4px;   /* pixel-block frames, Hero tetris masses only */
+
+  /* ============ SHADOWS / GLOWS ============ */
+  --shadow-block:  0 0 0 1px rgba(0,0,0,0.9), 6px 6px 0 0 var(--tn-black);   /* deprecated, kept for reference */
+  --shadow-soft:   0 20px 48px rgba(3,7,18,0.12);
+  --shadow-soft-dark: 0 20px 48px rgba(0,0,0,0.45);
+  --glow-lime:     0 0 0 2px rgba(152,255,3,0.35), 0 0 32px rgba(152,255,3,0.45);
+  --glow-magenta:  0 0 0 2px rgba(220,0,115,0.4), 0 0 32px rgba(220,0,115,0.55);
+
+  /* ============ GLASS — frosted overlay cards over photography ============ */
+  --glass-bg:      rgba(31, 31, 37, 0.55);
+  --glass-border:  rgba(255, 255, 255, 0.25);
+  --glass-blur:    32px;
+
+  /* ============ MOTION — smooth, Agenio-style (not snap) ============ */
+  --ease-tech:    cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-snap:    cubic-bezier(0.7, 0, 0.3, 1);   /* deprecated, kept for reference */
+  --ease-reveal:  cubic-bezier(0.16, 1, 0.3, 1);  /* the default easing sitewide now */
+  --dur-fast:     200ms;
+  --dur:          400ms;
+  --dur-slow:     600ms;
+  --dur-reveal:   700ms;
+
+  /* ============ GRID — pixel modular (Hero tetris masses only) ============ */
+  --grid-cell:    32px;
+}
+
+/* ============ LIGHT / CREAM SURFACE OVERRIDE ============ */
+[data-surface="cream"] {
+  --bg:        var(--tn-cream);
+  --bg-2:      var(--tn-paper-2);
+  --surface:   #FFFFFF;
+  --fg:        #030712;
+  --fg-2:      #6B7280;
+  --fg-mute:   #9CA3AF;
+  --hairline:  var(--tn-line-cream);
+  --shadow-block: 0 0 0 1px rgba(30,31,30,0.9), 6px 6px 0 0 var(--tn-black);
+}
+
+/* ============ BASE RESETS / CANONICAL ELEMENTS ============ */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* HEADERS — Display: editorial, sentence-case by default */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.display-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--t-display-xl); line-height: var(--lh-tight); letter-spacing: var(--tracking-display); }
+.display-lg { font-family: var(--font-display); font-weight: 700; font-size: var(--t-display-lg); line-height: var(--lh-tight); letter-spacing: var(--tracking-display); }
+
+/* BODY */
+p, .p {
+  font-family: var(--font-mono);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  margin: 0;
+}
+
+/* META / LABELS — uppercase chip/eyebrow treatment */
+.meta, .label, small {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-meta);
+  color: var(--fg-2);
+}
+
+.kbd, code {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.02em;
+  background: rgba(255,255,255,0.06);
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+}
+
+/* PIXEL — for "3nity" wordmark and 8-bit playful accents ONLY */
+.pixel {
+  font-family: var(--font-pixel);
+  font-size: var(--t-pixel);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  image-rendering: pixelated;
+}
+.pixel-lg { font-family: var(--font-pixel); font-size: var(--t-pixel-lg); line-height: 1; }
+
+/* LINKS */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease-reveal);
+}
+a:hover { color: var(--disrupt); }
+
+/* SELECTION */
+::selection { background: var(--tn-lime); color: var(--tn-black); }

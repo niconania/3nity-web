@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Components · Form" subtitle="Hairline fields · checkboxes · toggle" viewport="700x220" --><html><head><meta charset="utf-8"/><title>Form</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#1E1F1E;color:#FFF8F0;font-family:"JetBrains Mono",monospace}
+  .card{width:700px;height:220px;padding:18px 22px;box-sizing:border-box}
+  .meta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7E7C76;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#C9C3B9;margin-bottom:6px;display:block}
+  .fld{width:100%;background:transparent;border:none;border-bottom:1px solid #2A2B2A;color:#FFF8F0;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.05em;padding:8px 0;outline:none;box-sizing:border-box}
+  .fld:focus{border-color:#44FF02}
+  .fld.full{border:1px solid #2A2B2A;padding:10px 12px}
+  .check{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+  .box{width:14px;height:14px;background:#44FF02;display:inline-flex;align-items:center;justify-content:center;color:#1E1F1E;font-weight:700;font-size:11px}
+  .tog{width:34px;height:18px;background:#2A2B2A;position:relative}
+  .tog::after{content:"";position:absolute;top:2px;left:18px;width:14px;height:14px;background:#44FF02}
+</style></head><body>
+<div class="card">
+  <div class="meta">Form · monospace fields · 1px hairline · no rounding</div>
+  <div class="grid">
+    <div><label class="lbl">Project / 09°</label><input class="fld" value="3NITY"/></div>
+    <div><label class="lbl">Type</label><input class="fld" value="EDITORIAL POSTER"/></div>
+    <div><label class="lbl">Description</label><input class="fld full" value="HIGH-END LUXURY VISUAL EXPERIMENT"/></div>
+    <div><label class="lbl">Year</label><input class="fld" value="2026"/></div>
+    <div style="display:flex;gap:18px;align-items:center;margin-top:10px">
+      <div class="check"><span class="box">×</span> RGB</div>
+      <div class="check"><span class="box" style="background:transparent;box-shadow:inset 0 0 0 1px #7E7C76"></span> CMYK</div>
+      <div class="check"><span class="tog"></span> EXPORT</div>
+    </div>
+  </div>
+</div></body></html>

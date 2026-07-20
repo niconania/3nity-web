@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- @dsCard group="Colors" name="Colors · Gradients" subtitle="3 gradientes · verde→cream · azul→cream · magenta→cream" viewport="700x300" --><html><head><meta charset="utf-8"/><title>Colors · Gradients</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:#1E1F1E;color:#FFF8F0;font-family:'JetBrains Mono',monospace}
+  .card{
+    width:700px;height:300px;
+    background:#1E1F1E;
+    padding:16px;box-sizing:border-box;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;
+  }
+  .g{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:16px;box-sizing:border-box;overflow:hidden;color:#1E1F1E}
+  .g .fill{position:absolute;inset:0;z-index:0}
+  .g .top{position:relative;z-index:1;display:flex;flex-direction:column;gap:4px}
+  .g .name{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;line-height:1}
+  .g .role{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+  .g .specs{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;line-height:1.4}
+  .k{opacity:.7}.v{font-weight:500}
+
+  /* Three brand-vivids fading to cream #FFF8F0 */
+  .green   .fill{background:linear-gradient(160deg,#44FF02 0%,#FFF8F0 100%)}
+  .blue    .fill{background:linear-gradient(160deg,#1B2CC1 0%,#FFF8F0 100%)}
+  .fuchsia .fill{background:linear-gradient(160deg,#DC0073 0%,#FFF8F0 100%)}
+</style></head><body>
+<div class="card">
+  <div class="g green">
+    <div class="fill"></div>
+    <div class="top">
+      <div class="name">GREEN · CREAM</div>
+      <div class="role">LINEAR · ENERGÍA</div>
+    </div>
+    <div class="specs">
+      <div class="k">FROM</div><div class="v">N.°44FF02</div>
+      <div class="k">TO</div><div class="v">N.°FFF8F0</div>
+      <div class="k">TYPE</div><div class="v">LINEAR 160°</div>
+    </div>
+  </div>
+
+  <div class="g blue">
+    <div class="fill"></div>
+    <div class="top" style="color:#FFF8F0">
+      <div class="name">BLUE · CREAM</div>
+      <div class="role">LINEAR · PROFUNDIDAD</div>
+    </div>
+    <div class="specs">
+      <div class="k">FROM</div><div class="v">N.°1B2CC1</div>
+      <div class="k">TO</div><div class="v">N.°FFF8F0</div>
+      <div class="k">TYPE</div><div class="v">LINEAR 160°</div>
+    </div>
+  </div>
+
+  <div class="g fuchsia">
+    <div class="fill"></div>
+    <div class="top" style="color:#FFF8F0">
+      <div class="name">FUCHSIA · CREAM</div>
+      <div class="role">LINEAR · DISRUPCIÓN</div>
+    </div>
+    <div class="specs">
+      <div class="k">FROM</div><div class="v">N.°DC0073</div>
+      <div class="k">TO</div><div class="v">N.°FFF8F0</div>
+      <div class="k">TYPE</div><div class="v">LINEAR 160°</div>
+    </div>
+  </div>
+</div></body></html>
