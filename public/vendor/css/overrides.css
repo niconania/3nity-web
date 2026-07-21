@@ -193,10 +193,38 @@
    up with — badly, once a real photo (trabajo-01.webp, 1280x960 = 4:3) went
    in. The client's own photos for this carousel are all shot/delivered in
    4:3, so give the slider that same aspect-ratio instead of a min-height —
-   cover then has (near-)zero cropping to do since box and photo agree. */
+   cover then has (near-)zero cropping to do since box and photo agree.
+   That alone still blew up on wide desktop containers though (see
+   "Container side gutters" above — containers now stretch close to full
+   viewport width), since aspect-ratio has no ceiling: at ~1900px wide the
+   4:3 box became ~1420px tall. Capped with max-height:960px — below that
+   ceiling. First attempt was `max-height:960px` alongside the aspect-ratio
+   — doesn't work how it looks like it should: per spec, when a block's
+   width is "auto" (fills its container, which is the normal case here) and
+   its aspect-ratio-derived height gets clamped by max-height, the browser
+   RE-DERIVES the width from the ratio using the clamped height instead of
+   leaving width alone — measured result was a centered 1280x960 box that
+   stopped filling the container at all, instead of the intended "stay full
+   width, crop the overflow". Fixed by dropping aspect-ratio entirely past
+   the width where it would exceed 960px tall (1280px, since 1280*3/4=960)
+   and setting a flat height instead, which doesn't derive width from
+   anything — width keeps filling the (wide, post-gutter-fix) container,
+   height stays capped at 960, and cover crops the excess off the bottom
+   (object-position:top) instead of the section just getting taller and
+   taller (reported 2026-07-21). */
 .wpr-testimonials-area .swiper.testimonials-image-slider,
 .wpr-testimonials-area .testimonials-image-slider .swiper-slide {
   aspect-ratio: 4 / 3;
+}
+@media (min-width: 1280px) {
+  .wpr-testimonials-area .swiper.testimonials-image-slider,
+  .wpr-testimonials-area .testimonials-image-slider .swiper-slide {
+    aspect-ratio: auto;
+    height: 960px;
+  }
+}
+.testimonials-image-slider .image-area img {
+  object-position: center top;
 }
 
 /* Agenio's own "Our Vision" headline embeds a small inline crop of the same
