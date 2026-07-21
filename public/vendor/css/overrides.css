@@ -185,10 +185,18 @@
   height: 100%;
   object-fit: cover;
 }
-.service-wrapper,
+.service-wrapper {
+  min-height: 420px;
+}
+/* Featured-work photos (2026-07-21): a fixed min-height forced object-fit:
+   cover to crop every photo into whatever oddly-shaped box the swiper ended
+   up with — badly, once a real photo (trabajo-01.webp, 1280x960 = 4:3) went
+   in. The client's own photos for this carousel are all shot/delivered in
+   4:3, so give the slider that same aspect-ratio instead of a min-height —
+   cover then has (near-)zero cropping to do since box and photo agree. */
 .wpr-testimonials-area .swiper.testimonials-image-slider,
 .wpr-testimonials-area .testimonials-image-slider .swiper-slide {
-  min-height: 420px;
+  aspect-ratio: 4 / 3;
 }
 
 /* Agenio's own "Our Vision" headline embeds a small inline crop of the same

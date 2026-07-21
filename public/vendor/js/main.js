@@ -133,7 +133,7 @@
           speed: 1800,
           loop: true,
           autoplay: {
-            delay: 1000,
+            delay: 5000, // 3NITY: Agenio ships 1000ms, too fast to read a caption (2026-07-21)
             disableOnInteraction: false
           },
           navigation: {

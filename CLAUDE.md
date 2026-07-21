@@ -103,6 +103,18 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
 - **Wordmark**: el logo de Agenio (`assets/images/logo/01.svg`) se reemplazó por
   el texto `3nity™`. Desde 2026-07-19 sí usa la fuente píxel de la identidad
   3NITY (`That That New Pixel`, corte itálico) — ver "Fuentes de marca" arriba.
+- **`main.js` — único hand-edit al JS de Agenio (2026-07-21)**: el swiper
+  `.testimonials-image-slider` de "Trabajos destacados" traía `autoplay:
+  {delay: 1000}` — pasaba de foto cada 1 segundo, insuficiente para leer el
+  título/descripción de cada pieza. Es un valor de configuración inline
+  dentro de la llamada a `new Swiper(...)`, no una regla de CSS que se pueda
+  sobreescribir desde `overrides.css` ni algo expuesto globalmente para
+  reconfigurar desde otro script — se cambió a mano a `delay: 5000` (línea
+  ~136), con un comentario in-situ marcando el valor original de Agenio. Es
+  la única línea de `main.js` que no es una copia literal del template;
+  cualquier otro ajuste de comportamiento de JS debería seguir el mismo
+  patrón (edit mínimo, comentado, documentado acá) en vez de acumularse
+  silenciosamente.
 
 ### Si vas a tocar el HTML/CSS/JS de esta página
 - **Antes de nada**, mira `public/vendor/css/style.css` y `index.html` original
