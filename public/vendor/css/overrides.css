@@ -227,6 +227,22 @@
   object-position: center top;
 }
 
+/* "Trabajos destacados" — Agenio's own testimonials section never has a
+   heading at all (no .section-title-area anywhere in its markup); "FEATURED
+   WORK" is ours, added when we merged Agenio's separate Awards section into
+   this one carousel (see CLAUDE.md). It inherited none of Awards' own title
+   padding as a result, so it sat flush against the carousel below it while
+   every other section (FAQ included) gets 100px+ of breathing room around
+   its heading — reported as looking "cramped" next to FAQ (2026-07-21).
+   Matched to Agenio's own .wpr-awards-area .section-inner .section-title-area
+   values, since Awards is exactly the section this heading's concept came
+   from. */
+.wpr-testimonials-area .section-inner .section-title-area {
+  max-width: max-content;
+  margin: auto;
+  padding: 100px 0 70px;
+}
+
 /* Agenio's own "Our Vision" headline embeds a small inline crop of the same
    photo that later fills the pinned slider below it (sm.webp = a crop of
    01.webp) — a literal preview, not a logo/icon. Since 2026-07-20 this is
