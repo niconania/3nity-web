@@ -309,7 +309,7 @@ const FAQS = [
             <p class="sub-title bg-white">OUR VISION</p>
             <h2 class="section-title second-font font-semi-bold text-normal">
               Nace de un impulso <br>
-              <span>de solucionar <span><span class="photo-placeholder inline-teaser">FOTO</span></span> sin</span> <br>
+              <span>de solucionar <span><span class="inline-teaser"><video src="/videos/vision.mp4" poster="/videos/vision-poster.jpg" autoplay muted loop playsinline aria-label="3NITY — nuestra visión"></video></span></span> sin</span> <br>
               tener que pedirlo
             </h2>
             <p class="desc">Buscamos crear cosas que las personas no quieren, sino que las necesitan.</p>
@@ -319,11 +319,15 @@ const FAQS = [
           <div class="wpr-video-wrapper">
             <div class="swiper project-slider">
               <div class="swiper-wrapper">
-                {VISION_PROJECTS.map((p) => (
+                {VISION_PROJECTS.map((p, i) => (
                   <div class="swiper-slide">
                     <div class="slide feature-project">
                       <div class="image-area">
-                        <div class="photo-placeholder video-img" style="width:100%;height:100%;">FOTO PENDIENTE</div>
+                        {i === 0 ? (
+                          <video class="video-img" src="/videos/vision.mp4" poster="/videos/vision-poster.jpg" autoplay muted loop playsinline aria-label="3NITY — nuestra visión" />
+                        ) : (
+                          <div class="photo-placeholder video-img" style="width:100%;height:100%;">FOTO PENDIENTE</div>
+                        )}
                         <img src="/vendor/images/portfolio/shape-top-left.svg" alt="" class="shape top-left-shape" />
                         <img src="/vendor/images/portfolio/shape-top-right.svg" alt="" class="shape top-right-shape" />
                       </div>

@@ -159,34 +159,44 @@
 
 /* Agenio's own "Our Vision" headline embeds a small inline crop of the same
    photo that later fills the pinned slider below it (sm.webp = a crop of
-   01.webp) — a literal preview, not a logo/icon. We have no real photo yet,
-   so the honest equivalent is a mini version of the same FOTO PENDIENTE
-   swatch used everywhere else, not the 3NITY isotype (which reads as a logo
-   moment, not a photo teaser). Sized down from the base 100%-width block
-   placeholder to sit inline mid-sentence like Agenio's own img did. */
-.photo-placeholder.inline-teaser {
+   01.webp) — a literal preview, not a logo/icon. Since 2026-07-20 this is
+   real footage (public/videos/vision.mp4, same file as the pinned slider's
+   first slide below) — object-fit:cover crops its 16:9 source to the same
+   small 4:3 box the placeholder used, sized to sit inline mid-sentence like
+   Agenio's own img did. */
+.inline-teaser {
   display: inline-flex;
   width: 120px;
   aspect-ratio: 4 / 3;
   vertical-align: middle;
   margin: -15px 6px 0 10px;
-  font-size: 9px;
-  padding: 4px;
+  overflow: hidden;
+}
+.inline-teaser video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 @media (max-width: 576px) {
-  .photo-placeholder.inline-teaser {
+  .inline-teaser {
     width: 72px;
     margin: -6px 4px 0 6px;
-    font-size: 7px;
   }
 }
 
 /* Our Vision's pinned project slider (.wpr-video-pin) sizes .image-area/
-   .video-img from an explicit 100%/100% chain rooted at 100vh — our
-   placeholder already gets width/height:100% inline, this just neutralizes
-   the base .photo-placeholder aspect-ratio so it doesn't fight that chain. */
+   .video-img from an explicit 100%/100% chain rooted at 100vh. The first
+   slide (Pieza única) has real footage (public/videos/vision.mp4) since
+   2026-07-20 — object-fit:cover so its 16:9 source fills the 100vh-tall,
+   viewport-width box without distortion. Slides 2-3 (Prototipo, Serie corta)
+   still use the placeholder div until footage exists for those — the
+   aspect-ratio:auto neutralizes the base .photo-placeholder rule so it
+   doesn't fight the same 100%/100% chain. */
 .wpr-project-area .image-area .photo-placeholder {
   aspect-ratio: auto;
+}
+.wpr-project-area .video-img {
+  object-fit: cover;
 }
 
 /* Agenio's center-hero.webp/svg is actually two nested shapes baked into one
