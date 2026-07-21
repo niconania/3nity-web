@@ -29,9 +29,9 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { num: "01", title: "Idea", desc: "Cuéntanos qué necesitas: una foto, un boceto, o solo la idea." },
-  { num: "02", title: "Cotización", desc: "Evaluamos el modelo y respondemos por correo con precio y tiempo de entrega." },
-  { num: "03", title: "Entrega", desc: "Imprimimos, terminamos la pieza y coordinamos la entrega." },
+  { num: "01", title: "Idea", desc: "Cuéntanos qué necesitas: una foto, un boceto, o solo la idea.", video: "idea" },
+  { num: "02", title: "Cotización", desc: "Evaluamos el modelo y respondemos por correo con precio y tiempo de entrega.", video: "cotizacion" },
+  { num: "03", title: "Entrega", desc: "Imprimimos, terminamos la pieza y coordinamos la entrega.", video: "entrega" },
 ];
 
 const TEAM = [
@@ -394,7 +394,16 @@ const FAQS = [
               {PROCESS.map((p) => (
                 <div class="working-process-wrapper">
                   <div class="image-area">
-                    <div class="photo-placeholder" style="aspect-ratio: 4/3;">FOTO PENDIENTE</div>
+                    <video
+                      src={`/videos/process/${p.video}.mp4`}
+                      poster={`/videos/process/${p.video}-poster.jpg`}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      aria-label={`Proceso: ${p.title}`}
+                    />
                   </div>
                   <div class="content-area">
                     <div class="number">//{p.num}</div>

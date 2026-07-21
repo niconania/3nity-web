@@ -327,3 +327,20 @@
   content: "\2212" !important;
 }
 
+/* Real process-step footage (idea/cotización/entrega, 2026-07-20) — Agenio's
+   own img reset (max-width:100%; height:auto) only targets <img>, not
+   <video>, so it never applied here. Mirrors that reset plus the same
+   hover-zoom .working-process-wrapper already does for <img>. */
+.working-process-wrapper .image-area video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.working-process-wrapper:hover .image-area video {
+  transform: scale(1.1);
+}
+

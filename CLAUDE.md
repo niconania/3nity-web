@@ -68,6 +68,17 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
   que sí son parte legítima del código del template). Donde Agenio pone una foto,
   aquí hay un `.photo-placeholder` con "FOTO PENDIENTE" hasta que 3NITY entregue
   fotos reales (`public/work/`, ≤200KB, AVIF/WebP).
+  - **Excepción — Proceso (2026-07-20)**: las 3 tarjetas de `wpr-working-process`
+    (Idea/Cotización/Entrega) ya tienen video real del taller, no placeholder.
+    Fuente en `public/videos/process/{idea,cotizacion,entrega}.mp4` (+ su
+    `-poster.jpg`), comprimido con `ffmpeg` desde el original (960px de ancho,
+    H.264 CRF 23–26, sin audio, `+faststart`) — de ~103MB los 3 originales a
+    ~11.8MB. `<video autoplay muted loop playsinline preload="metadata">`,
+    igual que Agenio dimensiona `.image-area` desde una imagen real (ver punto
+    de arriba), ahora que el `<video>` tiene su propio tamaño intrínseco ya no
+    hace falta el hack de `aspect-ratio` — solo el reset `img{max-width:100%;
+    height:auto}` de Agenio no cubre `<video>`, así que ese reset se repite a
+    mano en `overrides.css` para `.working-process-wrapper .image-area video`.
 - **SplitText de GSAP** (usado en el efecto de scroll de "Our Vision") es un
   plugin de pago de Club GreenSock, licenciado al autor del template, no a
   nosotros. Se sustituyó por `public/vendor/js/splittext-shim.js`, que
