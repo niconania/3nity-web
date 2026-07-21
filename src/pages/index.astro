@@ -43,7 +43,18 @@ const TEAM = [
   { name: "Nicola A. Nania", role: "Chief Technology Officer" },
 ];
 
-const WORK_SLIDES = Array.from({ length: 6 }, (_, i) => String(i + 1).padStart(2, "0"));
+const WORK_SLIDES = [
+  {
+    title: "Productos estrella a gran escala",
+    desc: "CLIENTE — JMEDICAL & FILLMED. Modelamos, imprimimos y rotulamos envases referenciales a sus productos estrella.",
+    photo: "trabajo-01.webp",
+  },
+  ...Array.from({ length: 5 }, (_, i) => ({
+    title: `Pieza / ${String(i + 2).padStart(2, "0")}`,
+    desc: "Foto pendiente — próximamente en esta galería.",
+    photo: null,
+  })),
+];
 
 const VISION_PROJECTS = [
   {
@@ -511,10 +522,14 @@ const FAQS = [
         </div>
         <div class="swiper testimonials-image-slider">
           <div class="swiper-wrapper">
-            {WORK_SLIDES.map((n) => (
+            {WORK_SLIDES.map((w) => (
               <div class="swiper-slide">
                 <div class="image-area">
-                  <div class="photo-placeholder" style="width:100%;height:100%;">PIEZA / {n}</div>
+                  {w.photo ? (
+                    <img src={`/work/featured/${w.photo}`} alt={w.title} />
+                  ) : (
+                    <div class="photo-placeholder" style="width:100%;height:100%;">{w.title}</div>
+                  )}
                 </div>
               </div>
             ))}
@@ -522,12 +537,12 @@ const FAQS = [
         </div>
         <div class="swiper testimonials-content-slider">
           <div class="swiper-wrapper">
-            {WORK_SLIDES.map((n) => (
+            {WORK_SLIDES.map((w) => (
               <div class="swiper-slide">
                 <div class="testimonials-content">
                   <div class="top">
-                    <h2 class="title h5">Pieza / {n}</h2>
-                    <p class="desc">Foto pendiente — próximamente en esta galería.</p>
+                    <h2 class="title h5">{w.title}</h2>
+                    <p class="desc">{w.desc}</p>
                   </div>
                 </div>
               </div>
