@@ -1,3 +1,25 @@
+/* ---------- Container side gutters, tablet/laptop landscape (2026-07-21) ----------
+   Agenio's style.css actually contains TWO overlapping .container systems:
+   a simple `.container{max-width:1290px}` near the top, AND a full
+   Bootstrap-style breakpoint ladder further down in the same file
+   (max-width: 960px @992px, 1170px @1200px, 1408px @1440px) that wins by
+   source order since it's declared later within the same stylesheet. That
+   ladder creates wildly inconsistent side margins depending on exactly
+   where the viewport falls relative to each cap — measured via Playwright:
+   16px content-gap at 1440px (the cap happens to nearly match the
+   viewport), but 132px at 1194px (iPad Pro 11" landscape) and 106px at
+   1366px, both well past what reads as intentional breathing room and into
+   "why is there so much dead space" territory (reported 2026-07-21).
+   Replaced with a flat 16px gutter for every viewport ≥992px — no more
+   fixed max-width tiers to fall in and out of sync with. */
+@media (min-width: 992px) {
+  .container {
+    max-width: calc(100% - 32px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 /* ---------- 3NITY brand fonts (2026-07-19) ----------
    Agenio's style.css never actually loads Space Grotesk/Urbanist (no
    @font-face, no CDN link anywhere in Base.astro) — every heading/body rule
