@@ -322,6 +322,18 @@
     border-radius: 24px;
   }
 }
+/* Agenio caps .mid-icon at max-width:150px at <=576px (its own image would
+   scale down to fit); ours stayed a flat 220px at every width below 992px,
+   so the frame overflowed past its capped parent and rendered off-center —
+   left edge stayed put, right edge poked out (reported 2026-07-21, mobile).
+   Shrink the frame to fit inside that same 150px cap. */
+@media (max-width: 576px) {
+  .wpr-banner-area .mid-icon .frame {
+    width: 140px;
+    height: 140px;
+    border-radius: 14px;
+  }
+}
 
 /* Agenio's hero is tuned for short English words ("We ARE"/"CREATIVE") at a
    fixed 120px staircase (120/100/80/60/48 across its own breakpoints). Our

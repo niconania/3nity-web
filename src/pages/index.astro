@@ -410,7 +410,19 @@ const FAQS = [
               </div>
               <div class="text-area">
                 <p class="desc">Cada paso pensado para darte claridad y una pieza en tus manos.</p>
-                <a href="#contact" class="wpr-btn btn-primary with-icon">Solicitar cotización</a>
+                <a href="#contact" class="wpr-btn btn-primary with-icon">
+                  <div class="inner">
+                    <div class="icon">
+                      <span class="fixed-arrow">
+                        <img src="/vendor/images/icon/button-arrow-fixed.svg" alt="" />
+                      </span>
+                      {Array.from({ length: 4 }).map(() => (
+                        <span><img src="/vendor/images/icon/button-arrow-2.svg" alt="" /></span>
+                      ))}
+                    </div>
+                  </div>
+                  Solicitar cotización
+                </a>
               </div>
             </div>
           </div>
