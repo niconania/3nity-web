@@ -218,13 +218,13 @@
 }
 
 /* Our Vision's pinned project slider (.wpr-video-pin) sizes .image-area/
-   .video-img from an explicit 100%/100% chain rooted at 100vh. The first
-   slide (Pieza única) has real footage (public/videos/vision.mp4) since
-   2026-07-20 — object-fit:cover so its 16:9 source fills the 100vh-tall,
-   viewport-width box without distortion. Slides 2-3 (Prototipo, Serie corta)
-   still use the placeholder div until footage exists for those — the
-   aspect-ratio:auto neutralizes the base .photo-placeholder rule so it
-   doesn't fight the same 100%/100% chain. */
+   .video-img from an explicit 100%/100% chain rooted at 100vh. All three
+   slides have real footage since 2026-07-21 (public/videos/vision*.mp4,
+   one per VISION_PROJECTS entry) — object-fit:cover so each 16:9 source
+   fills the 100vh-tall, viewport-width box without distortion. The
+   aspect-ratio:auto rule stays in place for whenever a slide falls back to
+   the plain photo-placeholder div (no video yet), so it doesn't fight the
+   same 100%/100% chain. */
 .wpr-project-area .image-area .photo-placeholder {
   aspect-ratio: auto;
 }

@@ -49,6 +49,7 @@ const VISION_PROJECTS = [
   {
     title: "Pieza única",
     desc: "Una geometría irrepetible, resuelta en un solo intento. Sin molde, sin mínimos.",
+    video: "vision",
     stats: [
       { value: "1/1", label: "Piezas irrepetibles" },
       { value: "STL · 3MF", label: "Formatos que aceptamos" },
@@ -58,6 +59,7 @@ const VISION_PROJECTS = [
   {
     title: "Prototipo",
     desc: "Prueba la forma y el ajuste antes de comprometer el material final.",
+    video: "vision-prototipo",
     stats: [
       { value: "0.1mm", label: "Resolución de capa" },
       { value: "6+", label: "Materiales disponibles" },
@@ -67,6 +69,7 @@ const VISION_PROJECTS = [
   {
     title: "Serie corta",
     desc: "De la prueba a la producción, sin comprometer el acabado.",
+    video: "vision-seriecorta",
     stats: [
       { value: "Sin mínimo", label: "Lote flexible" },
       { value: "Multi-material", label: "Impresión" },
@@ -326,12 +329,12 @@ const FAQS = [
           <div class="wpr-video-wrapper">
             <div class="swiper project-slider">
               <div class="swiper-wrapper">
-                {VISION_PROJECTS.map((p, i) => (
+                {VISION_PROJECTS.map((p) => (
                   <div class="swiper-slide">
                     <div class="slide feature-project">
                       <div class="image-area">
-                        {i === 0 ? (
-                          <video class="video-img" src="/videos/vision.mp4" poster="/videos/vision-poster.jpg" autoplay muted loop playsinline aria-label="3NITY — nuestra visión" />
+                        {p.video ? (
+                          <video class="video-img" src={`/videos/${p.video}.mp4`} poster={`/videos/${p.video}-poster.jpg`} autoplay muted loop playsinline aria-label={`3NITY — ${p.title}`} />
                         ) : (
                           <div class="photo-placeholder video-img" style="width:100%;height:100%;">FOTO PENDIENTE</div>
                         )}
