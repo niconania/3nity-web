@@ -452,3 +452,17 @@
   transform: scale(1.1);
 }
 
+/* "Trabajos destacados" prev/next arrows were Agenio's default 110x110px —
+   a huge tap target relative to the actual 17x30 arrow icon inside, looked
+   oversized against the rest of the site's compact controls (reported
+   2026-07-22). Shrunk the button box and the icon together. */
+.wpr-testimonials-area .section-inner .swiper-navigation .swiper-btn {
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+}
+.wpr-testimonials-area .section-inner .swiper-navigation .swiper-btn svg {
+  width: 11px;
+  height: 20px;
+}
+
