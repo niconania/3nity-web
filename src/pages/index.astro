@@ -13,18 +13,21 @@ const SERVICES = [
     desc: "Piezas únicas y series cortas. Geometría que el molde no puede hacer.",
     num: "01",
     items: ["Modelado a medida", "Múltiples materiales", "Acabado y postprocesado", "Series cortas"],
+    photo: "servicio-01.webp",
   },
   {
     tag: "MODELADO",
     desc: "Del boceto o la referencia al archivo listo para imprimir.",
     num: "02",
     items: ["Escaneo y referencia", "Diseño paramétrico", "Optimización para impresión", "Revisión contigo"],
+    photo: null,
   },
   {
     tag: "PROTOTIPOS",
     desc: "Prueba la forma y el ajuste antes de comprometer el material final.",
     num: "03",
     items: ["Iteración rápida", "Validación de ajuste", "Múltiples versiones", "De prueba a producción"],
+    photo: "servicio-03.webp",
   },
 ];
 
@@ -270,7 +273,11 @@ const FAQS = [
           {SERVICES.map((s, i) => (
             <div class="service-wrapper wow fadeInRight" data-wow-delay={`${(i + 1) * 0.2}s`}>
               <div class="image-area">
-                <div class="photo-placeholder" style="aspect-ratio: 4/3;">FOTO PENDIENTE</div>
+                {s.photo ? (
+                  <img src={`/work/services/${s.photo}`} alt={s.tag} />
+                ) : (
+                  <div class="photo-placeholder" style="aspect-ratio: 4/3;">FOTO PENDIENTE</div>
+                )}
               </div>
               <div class="content">
                 <div class="top">

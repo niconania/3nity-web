@@ -151,6 +151,17 @@
   height: 100%;
   aspect-ratio: auto;
 }
+/* Real service photos (2026-07-21): Agenio's own CSS only transitions/scales
+   this <img> on hover, it never gives it width/height/object-fit — the
+   original template expects the <img>'s intrinsic size to establish
+   .image-area's height, which we deliberately broke above (.image-area is
+   absolutely positioned to fill the card instead, see comment above). So the
+   photo itself needs to fill that same box. */
+.service-wrapper .image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .service-wrapper,
 .wpr-testimonials-area .swiper.testimonials-image-slider,
 .wpr-testimonials-area .testimonials-image-slider .swiper-slide {
