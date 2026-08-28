@@ -423,23 +423,17 @@
   }
 }
 
-/* Servicio 02 "Modelado": en hover, Agenio pinta el número fantasma en
-   blanco translúcido (rgba(249,250,251,.8), regla suya) para que resalte
-   sobre una foto oscura — pero servicio-02.webp tiene justo debajo del "02"
-   una franja clara (la pieza tallada), así que el blanco se pierde ahí
-   (reportado 2026-08-28). Forzado a negro sólido para esta tarjeta puntual,
-   igual de legible que el resto del contenido en hover. */
-.wpr-services-area .section-bottom-content .service-wrapper:nth-child(2):hover .content .mid h2 {
-  color: rgba(3, 7, 18, 0.85);
-}
-
-/* Servicio 03 "Prototipos": servicio-03.webp tiene mucho fondo claro
-   alrededor del frasco, insuficiente para el texto blanco que Agenio monta
-   encima en hover (reportado 2026-08-28). Scrim oscuro fijo sobre la propia
-   foto — no hace falta gatillarlo por :hover porque el overlay blanco de
-   Agenio (.service-wrapper::after) ya tapa imagen+scrim por completo fuera
-   de hover; en hover, z-index:1 lo deja por encima de la <img> (sin
+/* Servicios 02 "Modelado" y 03 "Prototipos": ambas fotos (servicio-02.webp,
+   servicio-03.webp) tienen zonas claras/de bajo contraste justo donde Agenio
+   monta su número fantasma y texto blancos en hover, haciéndolos ilegibles
+   (reportado 2026-08-28; un primer intento forzando el "02" a negro sólido
+   se descartó — se veía peor que el blanco original). Scrim oscuro fijo
+   sobre la propia foto en vez de tocar el color del texto — no hace falta
+   gatillarlo por :hover porque el overlay blanco de Agenio
+   (.service-wrapper::after) ya tapa imagen+scrim por completo fuera de
+   hover; en hover, z-index:1 lo deja por encima de la <img> (sin
    posicionar) y por debajo de .content (z-index:2). */
+.wpr-services-area .section-bottom-content .service-wrapper:nth-child(2) .image-area::before,
 .wpr-services-area .section-bottom-content .service-wrapper:nth-child(3) .image-area::before {
   content: "";
   position: absolute;
