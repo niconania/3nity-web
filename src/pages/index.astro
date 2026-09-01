@@ -1,8 +1,12 @@
 ---
 // Literal port of the Agenio template (see CLAUDE.md): real markup/classes/
 // CSS from the licensed template, 3NITY content poured in. Single page,
-// multi-page nav (about/service/work/blog) consolidated into anchors.
+// multi-page nav (about/service/work) consolidated into anchors — except
+// /blog, which is real multi-page (see CLAUDE.md, módulo de blog).
 import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteCta from "../components/SiteCta.astro";
 import { site } from "../config";
 
 const w3fKey = import.meta.env.PUBLIC_W3F_KEY ?? "";
@@ -48,11 +52,13 @@ const WORK_SLIDES = [
     title: "Productos a gran escala",
     desc: "CLIENTE — JMEDICAL & FILLMED. Modelamos, imprimimos y rotulamos envases referenciales a sus productos estrella.",
     photo: "trabajo-01.webp",
+    blogSlug: "productos-a-gran-escala",
   },
   ...Array.from({ length: 5 }, (_, i) => ({
     title: `Pieza / ${String(i + 2).padStart(2, "0")}`,
     desc: "Foto pendiente — próximamente en esta galería.",
     photo: null,
+    blogSlug: undefined as string | undefined,
   })),
 ];
 
@@ -98,61 +104,7 @@ const FAQS = [
 ---
 
 <Base>
-  <!-- header area start -->
-  <header class="header-style-one">
-    <div class="container">
-      <div class="header-style-one-wrapper">
-        <div class="left-area square-dot">
-          <div class="logo-area">
-            <a href="#top" class="logo">3nity<sup>™</sup></a>
-          </div>
-          <span class="square-shape top-left"></span>
-          <span class="square-shape bottom-left"></span>
-          <span class="square-shape top-right"></span>
-          <span class="square-shape bottom-right"></span>
-        </div>
-        <nav class="main-nav-area">
-          <ul class="list-unstyled wpr-desktop-menu">
-            <li class="menu-item active"><a class="main-element" href="#top">Inicio</a></li>
-            <li class="menu-item"><a class="main-element" href="#services">Servicios</a></li>
-            <li class="menu-item"><a class="main-element" href="#trabajos">Trabajos</a></li>
-            <li class="menu-item"><a class="main-element" href="#team">Equipo</a></li>
-            <li class="menu-item"><a class="main-element" href="#contact">Contacto</a></li>
-          </ul>
-        </nav>
-        <div class="button-area-start square-dot">
-          <a href="#contact" class="wpr-btn btn-primary">Solicitar cotización</a>
-          <div class="menu-btn d-flex d-lg-none d-md-flex d-sm-flex" id="menu-btn">
-            <span class="line one"></span>
-            <span class="line two"></span>
-          </div>
-          <span class="square-shape top-left"></span>
-          <span class="square-shape bottom-left"></span>
-          <span class="square-shape top-right"></span>
-          <span class="square-shape bottom-right"></span>
-        </div>
-        <div id="side-bar" class="side-bar">
-          <div class="sidebar-inner">
-            <div class="mobile-menu-main">
-              <nav class="nav-main mainmenu-nav">
-                <ul class="list-unstyled wpr-desktop-menu" id="mobile-menu">
-                  <li class="menu-item"><a class="main-element" href="#top">Inicio</a></li>
-                  <li class="menu-item"><a class="main-element" href="#services">Servicios</a></li>
-                  <li class="menu-item"><a class="main-element" href="#trabajos">Trabajos</a></li>
-                  <li class="menu-item"><a class="main-element" href="#team">Equipo</a></li>
-                  <li class="menu-item"><a class="main-element" href="#contact">Contacto</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="button-area">
-              <a href="#contact" class="wpr-btn btn-primary">Contacto</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- header area end -->
+  <SiteHeader active="top" />
 
   <!-- wpr banner area start -->
   <section class="wpr-banner-area" id="top">
@@ -556,6 +508,9 @@ const FAQS = [
                   <div class="top">
                     <h2 class="title h5">{w.title}</h2>
                     <p class="desc">{w.desc}</p>
+                    {w.blogSlug && (
+                      <a href={`/blog/${w.blogSlug}`} class="tf-btn-2">Leer el caso completo</a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -606,21 +561,7 @@ const FAQS = [
   </section>
   <!-- wpr faq area end -->
 
-  <!-- wpr cta area start -->
-  <section class="wpr-cta-area">
-    <div class="container">
-      <div class="section-inner border-1">
-        <div class="section-title-area">
-          <h2 class="section-title">Empecemos <br> tu proyecto</h2>
-        </div>
-        <div class="section-bottom-shape">
-          <span class="tag left">HECHO A MANO</span>
-          <span class="tag right">ENTREGA LOCAL</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- wpr cta area end -->
+  <SiteCta />
 
   <!-- wpr contact area start -->
   <section id="contact" class="wpr-contact-area mb--16">
@@ -682,44 +623,7 @@ const FAQS = [
   </section>
   <!-- wpr contact area end -->
 
-  <!-- wpr footer area start -->
-  <footer class="wpr-footer-area">
-    <div class="container">
-      <div class="section-inner border-1">
-        <div class="footer-top">
-          <ul>
-            <li><a href="#services">Servicios</a></li>
-            <li class="square-dot"></li>
-            <li><a href="#trabajos">Trabajos</a></li>
-            <li class="square-dot"></li>
-            <li><a href="#team">Equipo</a></li>
-            <li class="square-dot"></li>
-            <li><a href="#contact">Contacto</a></li>
-          </ul>
-        </div>
-        <div class="footer-logo-area square-dot">
-          <a href="#top" class="logo">3nity<sup>™</sup></a>
-          <span class="square-shape top-left"></span>
-          <span class="square-shape top-right"></span>
-          <span class="square-shape bottom-left"></span>
-          <span class="square-shape bottom-right"></span>
-        </div>
-        <div class="copyright-area">
-          <div class="left-social-area">
-            <ul>
-              <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            </ul>
-          </div>
-          <p class="copyright">© {new Date().getFullYear()} 3NITY — Venezuela. Todos los derechos reservados.</p>
-          <button class="scroll-top-btn">
-            Back to Top
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3.29688L7.64062 3.64062L1.39062 9.89062L2.10938 10.6094L8 4.71875L13.8906 10.6094L14.6094 9.89062L8.35938 3.64062L8 3.29688Z" fill="black"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- wpr footer area end -->
+  <SiteFooter />
 </Base>
 
 <script>

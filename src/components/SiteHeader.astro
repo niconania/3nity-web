@@ -1,0 +1,75 @@
+---
+// Shared header/nav, extracted from index.astro so /blog pages don't
+// duplicate ~50 lines of markup (see CLAUDE.md — módulo de blog).
+// `base` resolves in-page anchors: "" on the home page itself (plain
+// "#trabajos"), "/" anywhere else ("/#trabajos") so they navigate back to
+// the homepage section. main.js's onepage smooth-scroll only intercepts
+// literal a[href^="#"], so "/#trabajos" is left alone and navigates normally.
+interface Props {
+  base?: "" | "/";
+  active?: "top" | "services" | "trabajos" | "team" | "contact" | "blog";
+}
+
+const { base = "", active = "top" } = Astro.props;
+
+const NAV_ITEMS = [
+  { id: "top", label: "Inicio", href: `${base}#top` },
+  { id: "services", label: "Servicios", href: `${base}#services` },
+  { id: "trabajos", label: "Trabajos", href: `${base}#trabajos` },
+  { id: "team", label: "Equipo", href: `${base}#team` },
+  { id: "blog", label: "Blog", href: "/blog" },
+  { id: "contact", label: "Contacto", href: `${base}#contact` },
+] as const;
+---
+
+<!-- header area start -->
+<header class="header-style-one">
+  <div class="container">
+    <div class="header-style-one-wrapper">
+      <div class="left-area square-dot">
+        <div class="logo-area">
+          <a href={`${base}#top`} class="logo">3nity<sup>™</sup></a>
+        </div>
+        <span class="square-shape top-left"></span>
+        <span class="square-shape bottom-left"></span>
+        <span class="square-shape top-right"></span>
+        <span class="square-shape bottom-right"></span>
+      </div>
+      <nav class="main-nav-area">
+        <ul class="list-unstyled wpr-desktop-menu">
+          {NAV_ITEMS.map((item) => (
+            <li class:list={["menu-item", { active: item.id === active }]}><a class="main-element" href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div class="button-area-start square-dot">
+        <a href={`${base}#contact`} class="wpr-btn btn-primary">Solicitar cotización</a>
+        <div class="menu-btn d-flex d-lg-none d-md-flex d-sm-flex" id="menu-btn">
+          <span class="line one"></span>
+          <span class="line two"></span>
+        </div>
+        <span class="square-shape top-left"></span>
+        <span class="square-shape bottom-left"></span>
+        <span class="square-shape top-right"></span>
+        <span class="square-shape bottom-right"></span>
+      </div>
+      <div id="side-bar" class="side-bar">
+        <div class="sidebar-inner">
+          <div class="mobile-menu-main">
+            <nav class="nav-main mainmenu-nav">
+              <ul class="list-unstyled wpr-desktop-menu" id="mobile-menu">
+                {NAV_ITEMS.map((item) => (
+                  <li class:list={["menu-item", { active: item.id === active }]}><a class="main-element" href={item.href}>{item.label}</a></li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+          <div class="button-area">
+            <a href={`${base}#contact`} class="wpr-btn btn-primary">Contacto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- header area end -->

@@ -1,0 +1,74 @@
+---
+// Blog article — real markup/classes from Agenio's blog-single.html (see
+// CLAUDE.md, módulo de blog). No comments/tags/share: static demo widgets
+// with no backend, dropped for the same reason contact-form.js's mailer.php
+// was replaced instead of shipped as-is.
+import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteCta from "../../components/SiteCta.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
+const { Content } = await render(post);
+
+// timeZone: "UTC" — publishDate es una fecha de calendario sin hora
+// (YAML "2026-08-07" parsea a medianoche UTC); sin fijar UTC aquí, formatear
+// en una zona horaria detrás de UTC (ej. America/Caracas) la corre un día atrás.
+const dateFormatter = new Intl.DateTimeFormat("es-VE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+
+<Base title={`${post.data.title} — 3NITY Blog`} description={post.data.excerpt}>
+  <SiteHeader base="/" active="blog" />
+
+  <!-- wpr banner area start -->
+  <section class="wpr-banner-area breadcrumb">
+    <div class="container">
+      <div class="banner-content-area">
+        <h1 class="section-title text-normal">{post.data.title}</h1>
+      </div>
+    </div>
+  </section>
+  <!-- wpr banner area end -->
+
+  <!-- wpr blog area start -->
+  <section class="wpr-blog-area mb--16">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="blog-single-wrap">
+              <div class="image">
+                {post.data.cover ? (
+                  <img loading="lazy" src={post.data.cover} alt={post.data.title} />
+                ) : (
+                  <div class="photo-placeholder" style="aspect-ratio: 1.4;">FOTO PENDIENTE</div>
+                )}
+              </div>
+              <div class="meta-list">
+                <span class="meta-item">3NITY</span>
+                <span class="meta-item">{dateFormatter.format(post.data.publishDate)}</span>
+              </div>
+              <div class="text-body-2">
+                <Content />
+              </div>
+              <div class="entry-footer">
+                <a href="/#trabajos" class="tf-btn-2">Volver a Trabajos destacados</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr blog area end -->
+
+  <SiteCta />
+  <SiteFooter base="/" />
+</Base>

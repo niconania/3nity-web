@@ -1,0 +1,99 @@
+---
+// Blog listing — real markup/classes from Agenio's blog-standard.html (see
+// CLAUDE.md, módulo de blog). Sidebar only shows "Entradas recientes" from
+// real collection data — no search/categories/newsletter (no backend for
+// them, see CLAUDE.md).
+import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteCta from "../../components/SiteCta.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+// timeZone: "UTC" — ver nota en blog/[slug].astro (evita el corrimiento de
+// un día al formatear en zonas horarias detrás de UTC).
+const dateFormatter = new Intl.DateTimeFormat("es-VE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+
+<Base title="Blog — 3NITY" description="Notas del taller: procesos, materiales y piezas que hemos hecho.">
+  <SiteHeader base="/" active="blog" />
+
+  <!-- wpr banner area start -->
+  <section class="wpr-banner-area breadcrumb">
+    <div class="container">
+      <div class="banner-content-area">
+        <h1 class="section-title text-normal">Blog</h1>
+        <p class="desc">Notas del taller: procesos, materiales y piezas que hemos hecho.</p>
+      </div>
+    </div>
+  </section>
+  <!-- wpr banner area end -->
+
+  <!-- wpr blog area start -->
+  <section class="wpr-blog-area mb--16">
+    <div class="container">
+      <div class="section-inner border-1">
+        <div class="row justify-content-between">
+          <div class="col-xl-7 col-lg-8">
+            <div class="tf-grid-layout">
+              {posts.map((post) => (
+                <div class="article-blog style-horizontal">
+                  <a href={`/blog/${post.id}`} class="blog-image img-style">
+                    {post.data.cover ? (
+                      <img loading="lazy" src={post.data.cover} alt={post.data.title} />
+                    ) : (
+                      <div class="photo-placeholder" style="aspect-ratio: 1.5;">FOTO PENDIENTE</div>
+                    )}
+                  </a>
+                  <div class="blog-content">
+                    <div class="infor">
+                      <p class="infor_sub">{dateFormatter.format(post.data.publishDate)}</p>
+                      <h2 class="h6">
+                        <a href={`/blog/${post.id}`} class="infor_name">{post.data.title}</a>
+                      </h2>
+                      <p class="desc">{post.data.excerpt}</p>
+                    </div>
+                    <a href={`/blog/${post.id}`} class="tf-btn-2">Leer más</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="blog-sidebar m-lg-0">
+              <div class="sidebar-item">
+                <h2 class="h5 sidebar-title">Entradas recientes</h2>
+                <div class="list-relatest-post">
+                  {posts.map((post) => (
+                    <div class="relatest-post-item">
+                      <div class="image">
+                        {post.data.cover ? (
+                          <img loading="lazy" width="80" height="80" src={post.data.cover} alt={post.data.title} />
+                        ) : (
+                          <div class="photo-placeholder" style="width:80px;height:80px;"></div>
+                        )}
+                      </div>
+                      <div class="content">
+                        <h2 class="h6 title text-body-1">
+                          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                        </h2>
+                        <p class="time text-body-3">{dateFormatter.format(post.data.publishDate)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr blog area end -->
+
+  <SiteCta />
+  <SiteFooter base="/" />
+</Base>

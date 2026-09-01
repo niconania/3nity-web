@@ -7,8 +7,12 @@ Objetivo de conversión: que el visitante envíe una solicitud de cotización po
 **formulario de contacto → llega por correo**. No se muestran precios (se cotiza en privado).
 
 ## Stack
-- **Astro 5** (output estático, sin SSR), una sola página (`src/pages/index.astro`)
-- Deploy: Cloudflare Pages / Vercel (estático)
+- **Astro 5** (output estático, sin SSR). La landing sigue siendo una sola
+  página (`src/pages/index.astro`); desde 2026-08-07 el sitio también tiene
+  un módulo de blog real y multipágina (`/blog`, `/blog/[slug]`) — ver
+  "Módulo de blog" más abajo.
+- Deploy: Cloudflare Pages / Vercel (estático) — en producción, Vercel
+  (`https://3nity-web.vercel.app/`), deploy automático al pushear a `main`.
 - Formulario: Web3Forms (POST vía fetch + honeypot antispam). El access key vive en
   variable de entorno pública `PUBLIC_W3F_KEY` (ver `.env.example`).
 
@@ -89,11 +93,15 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
   sitio estático). Se reemplazó por `public/vendor/js/contact-form-web3forms.js`,
   que intercepta el mismo `#contact-form`/`#form-messages` pero hace `fetch` a
   Web3Forms.
-- **Página única, no multipágina**: Agenio trae `about.html`, `service.html`,
-  `work.html`, `contact.html`, `blog-*.html` como páginas separadas. 3NITY sigue
-  siendo v1 = una sola página (decisión original del proyecto) — el contenido de
-  esas páginas se consolidó en secciones con anchors (`#about`, `#services`,
-  `#trabajos`, `#team`, `#contact`) dentro de `index.astro`.
+- **Landing de una sola página, salvo el blog**: Agenio trae `about.html`,
+  `service.html`, `work.html`, `contact.html` como páginas separadas — ese
+  contenido se consolidó en secciones con anchors (`#about`, `#services`,
+  `#trabajos`, `#team`, `#contact`) dentro de `index.astro` (decisión
+  original del proyecto, sigue vigente). La excepción es `blog-*.html`:
+  desde 2026-08-07 el blog **sí** es multipágina real (`/blog`,
+  `/blog/[slug]`) — decisión explícita del dueño del proyecto que revierte
+  lo que este mismo archivo decía antes ("no agregar blog"). Ver "Módulo
+  de blog" más abajo.
 - **Secciones omitidas** (sin contenido real que poner ahí, no fabricar): el
   carrusel de logos de clientes, "The Difference"/"Why Choose Us" (×2), y
   "Pricing Plans" (3NITY nunca muestra precios en la web, ver arriba). Awards +
@@ -115,6 +123,46 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
   cualquier otro ajuste de comportamiento de JS debería seguir el mismo
   patrón (edit mínimo, comentado, documentado acá) en vez de acumularse
   silenciosamente.
+
+### Módulo de blog (2026-08-07)
+Un artículo por trabajo real, enlazado desde "Trabajos destacados". Sigue
+siendo 100% estático — no es un CMS, es una content collection de Astro
+versionada en el repo:
+- `src/content.config.ts` — define la colección `blog` (loader `glob` sobre
+  `src/content/blog/*.md`, schema `title`/`excerpt`/`publishDate`/`cover`
+  opcional). `cover` es un path público (`/work/...`), mismo patrón que
+  `photo` en `SERVICES`/`WORK_SLIDES` de `index.astro` — no usa el pipeline
+  de assets de Astro.
+- `src/content/blog/*.md` — un archivo por artículo. Para agregar el
+  próximo: nuevo `.md` con ese frontmatter + cuerpo en Markdown, y (si
+  corresponde a un `WORK_SLIDES` real) agregarle `blogSlug: "<nombre-del-
+  archivo-sin-extensión>"` a su entrada en `index.astro` para que aparezca
+  el link "Leer el caso completo" en Trabajos destacados. **No crear
+  artículos para trabajos sin foto/contenido real** — mismo criterio de
+  "no fabricar contenido" que rige el resto del sitio (ver "Qué NO hacer").
+- `src/pages/blog/index.astro` (listado) y `src/pages/blog/[slug].astro`
+  (artículo) — markup/clases reales de `blog-standard.html`/
+  `blog-single.html` del ZIP original de Agenio, confirmadas contra
+  `style.css` antes de usarlas (varias clases de esos dos HTML —
+  `.link1`, `fw-semibold`, `text-secondary`, `text-white-64` — no están
+  definidas en ningún CSS del template, ni siquiera en el original; se
+  omitieron en vez de copiarlas).
+- **Se omitieron deliberadamente**: comentarios, buscador y newsletter del
+  sidebar de Agenio (formularios estáticos sin backend en el HTML
+  original — mismo criterio que ya aplicó este proyecto con
+  `contact-form.js`/`mailer.php` y con el glifo de FAQ: no shippear algo
+  que aparenta funcionar y no funciona), y los íconos de meta
+  autor/fecha (`.icon-user-solid` etc. viven en `assets/fonts/custom-
+  font.css` del ZIP de Agenio — fuente `icomoon` que **no está portada**
+  a `public/vendor/`; la fila de meta va en texto plano en vez de sumar
+  otra fuente de íconos).
+- `src/components/SiteHeader.astro`, `SiteFooter.astro`, `SiteCta.astro` —
+  el header/footer/CTA de Agenio, extraídos de `index.astro` a
+  componentes compartidos para no duplicarlos en `/blog`. Prop `base`
+  (`""` en home, `"/"` en cualquier otra página) resuelve los anchors de
+  sección: `#trabajos` en home, `/#trabajos` fuera de home. Es seguro:
+  `main.js` solo intercepta `a[href^="#"]` para el smooth-scroll de
+  Agenio (`onepage`), así que `/#trabajos` navega normal.
 
 ### Si vas a tocar el HTML/CSS/JS de esta página
 - **Antes de nada**, mira `public/vendor/css/style.css` y `index.html` original
@@ -142,7 +190,12 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
   pero revisa el contraste del contenido que reemplazamos.
 
 ## Qué NO hacer
-- No agregar CMS, blog, carrito, precios ni cotizador público (futuras fases).
+- No agregar CMS, carrito, precios ni cotizador público (futuras fases). El
+  blog (`/blog`) sí existe desde 2026-08-07 — ver "Módulo de blog" — pero
+  sigue sin CMS: son archivos Markdown versionados en el repo, no un panel
+  de administración.
+- No crear artículos de blog para trabajos sin foto/contenido real (ver
+  "Módulo de blog") — mismo criterio de no fabricar contenido de abajo.
 - No usar las fotos de stock de Agenio en producción — son solo para la demo del
   vendedor. Placeholders hasta tener fotos reales de 3NITY.
 - No usar SplitText de GSAP directamente (sin el shim) — problema de licencia,

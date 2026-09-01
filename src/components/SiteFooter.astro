@@ -1,0 +1,45 @@
+---
+// Shared footer, extracted from index.astro (see SiteHeader.astro for the
+// `base` anchor-prefix rationale).
+import { site } from "../config";
+
+interface Props {
+  base?: "" | "/";
+}
+
+const { base = "" } = Astro.props;
+---
+
+<!-- wpr footer area start -->
+<footer class="wpr-footer-area">
+  <div class="container">
+    <div class="section-inner border-1">
+      <div class="footer-top">
+        <ul>
+          <li><a href={`${base}#services`}>Servicios</a></li>
+          <li class="square-dot"></li>
+          <li><a href={`${base}#trabajos`}>Trabajos</a></li>
+          <li class="square-dot"></li>
+          <li><a href="/blog">Blog</a></li>
+          <li class="square-dot"></li>
+          <li><a href={`${base}#team`}>Equipo</a></li>
+          <li class="square-dot"></li>
+          <li><a href={`${base}#contact`}>Contacto</a></li>
+        </ul>
+      </div>
+      <div class="copyright-area">
+        <div class="left-social-area">
+          <ul>
+            <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          </ul>
+        </div>
+        <p class="copyright">© {new Date().getFullYear()} 3NITY — Venezuela. Todos los derechos reservados.</p>
+        <button class="scroll-top-btn">
+          Back to Top
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3.29688L7.64062 3.64062L1.39062 9.89062L2.10938 10.6094L8 4.71875L13.8906 10.6094L14.6094 9.89062L8.35938 3.64062L8 3.29688Z" fill="black"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- wpr footer area end -->
