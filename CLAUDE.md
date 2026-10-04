@@ -131,11 +131,31 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
   lo que este mismo archivo decía antes ("no agregar blog"). Ver "Módulo
   de blog" más abajo.
 - **Secciones omitidas** (sin contenido real que poner ahí, no fabricar): el
-  carrusel de logos de clientes, "The Difference"/"Why Choose Us" (×2), y
-  "Pricing Plans" (3NITY nunca muestra precios en la web, ver arriba). Awards +
-  Testimonials de Agenio se fusionaron en **un solo carrusel** (`#trabajos`,
-  reusa `testimonials-image-slider`/`testimonials-content-slider`) mostrando
-  piezas propias en vez de premios o citas de clientes que no tenemos.
+  carrusel de logos de clientes, "Why Choose Us" (`wpr-why-choose-us-area2`),
+  y "Pricing Plans" (3NITY nunca muestra precios en la web, ver arriba).
+  Awards + Testimonials de Agenio se fusionaron en **un solo carrusel**
+  (`#trabajos`, reusa `testimonials-image-slider`/`testimonials-content-slider`)
+  mostrando piezas propias en vez de premios o citas de clientes que no tenemos.
+- **MakerWorld → cotización (2026-10-04)**: "The Difference"
+  (`wpr-why-choose-us-area`, markup del `index.html` original) ya no está
+  omitida: es `#makerworld`, entre Trabajos destacados y FAQ. "Tú eliges"
+  (elegir un modelo, copiar su link, pegarlo en el formulario) frente a lo
+  que hace el estudio (revisar la licencia, cotizar, imprimir y entregar).
+  Las dos listas usan el estilo destacado de Agenio (`wrapper-list two` +
+  `check-02`), porque el apagado es para el lado "otras agencias" de una
+  comparación. Explorar lleva a la colección del estudio
+  (`MAKERWORLD_COLLECTION` en `index.astro`), no a búsquedas sueltas.
+  MakerWorld bloquea el acceso automatizado (Cloudflare 403), así que
+  ningún link a MakerWorld se puede verificar desde aquí: se prueba a mano.
+  El formulario tiene la opción `makerworld` y el campo opcional
+  `model_link` (`type="text" inputmode="url"`, para no frenar el envío si
+  falta `https://`). El botón "Cotizar un modelo" preselecciona la opción
+  (script inline al final de `index.astro`).
+  **Regla de licencias**: no se copian modelos ni fotos de MakerWorld a la
+  web. Antes de cotizar un link, el estudio revisa la licencia del modelo:
+  la Standard Digital File License (la mayoría) prohíbe vender impresiones;
+  solo se imprime para la venta con CC BY, CC BY-SA, CC0 o permiso del
+  autor. Lo mismo dice la pregunta de MakerWorld en el FAQ.
 - **Wordmark**: el logo de Agenio (`assets/images/logo/01.svg`) se reemplazó por
   el texto `3nity™`. Desde 2026-07-19 sí usa la fuente píxel de la identidad
   3NITY (`That That New Pixel`, corte itálico) — ver "Fuentes de marca" arriba.
