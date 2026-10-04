@@ -11,6 +11,19 @@ import { site } from "../config";
 
 const w3fKey = import.meta.env.PUBLIC_W3F_KEY ?? "";
 
+// Without the key, Web3Forms can't route submissions to any inbox: the form
+// still renders, but every request is rejected. That shipped unnoticed once
+// (found live with access_key="" on 2026-10-04). Fail Vercel builds instead:
+// a failed build keeps the previous deploy online, so this only blocks
+// publishing a broken form, never takes the site down. Local builds without
+// a .env are unaffected (VERCEL is only set on Vercel's build machines).
+if (import.meta.env.VERCEL && !w3fKey) {
+  throw new Error(
+    "PUBLIC_W3F_KEY no está configurada en Vercel: el formulario de contacto no enviaría nada. " +
+      "Agrégala en Vercel → Settings → Environment Variables y vuelve a desplegar (ver .env.example).",
+  );
+}
+
 const SERVICES = [
   {
     tag: "IMPRESIÓN 3D",
