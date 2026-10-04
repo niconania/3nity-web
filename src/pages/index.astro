@@ -54,10 +54,13 @@ const PROCESS = [
   { num: "03", title: "Entrega", desc: "Imprimimos, terminamos la pieza y coordinamos la entrega.", video: "entrega" },
 ];
 
+// Brand glyph on each founder's brand color instead of a photo until real
+// portraits exist — same pairings as the brand's 3 billboards
+// (billboards-tryptic.png): magenta/Marketing, lime/Numbers, cobalt/Design.
 const TEAM = [
-  { name: "Sara A. Oliviero", role: "Chief Marketing Officer" },
-  { name: "José S. Moreno", role: "Chief Financial Officer" },
-  { name: "Nicola A. Nania", role: "Chief Technology Officer" },
+  { name: "Sara A. Oliviero", role: "Chief Marketing Officer", glyph: "glyph-rise", color: "magenta" },
+  { name: "José S. Moreno", role: "Chief Financial Officer", glyph: "glyph-stairs", color: "lime" },
+  { name: "Nicola A. Nania", role: "Chief Technology Officer", glyph: "glyph-totem", color: "cobalt" },
 ];
 
 // Only real pieces with real photos (CLAUDE.md: no fabricated content). To
@@ -464,7 +467,9 @@ const FAQS = [
                 <div class={`col-xl-4 col-md-6 wow ${i % 2 === 0 ? "fadeInDown" : "fadeInUp"}`} data-wow-delay={`${(i + 1) * 0.2}s`}>
                   <div class:list={["team-wrapper", { down: i % 2 !== 0 }]}>
                     <div class="image-area">
-                      <div class="photo-placeholder" style="aspect-ratio: 1;">FOTO PENDIENTE</div>
+                      <div class={`team-glyph team-glyph--${m.color}`}>
+                        <img src={`/brand/glyphs/${m.glyph}.png`} alt="" />
+                      </div>
                     </div>
                     <div class="author-area">
                       <h3 class="title h6">{m.name}</h3>

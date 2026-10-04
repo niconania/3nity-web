@@ -503,3 +503,32 @@
   }
 }
 
+
+/* Team cards (2026-10-04): no portraits yet, so instead of a grey "FOTO
+   PENDIENTE" box each founder gets a brand glyph on their brand color —
+   same pairings as the 3 billboards in the brand kit (magenta/Marketing,
+   lime/Numbers, cobalt/Design; magenta and cobalt are also tagged as Sara's
+   and Nicola's founder swatches in colors_and_type.css). Square, like the
+   photo it stands in for. Agenio's .author-area is an absolutely positioned
+   white card over the bottom of the image (bottom:16px, ~90px tall at every
+   width), so the bottom padding reserves that fixed height plus a gap and
+   the glyph centers in the space above the card instead of under it. Swap
+   .team-glyph for an <img> once real photos exist. */
+.team-glyph {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12% 14% calc(124px + 4%);
+}
+.team-glyph img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.team-glyph--magenta { background: #DC0073; }
+.team-glyph--lime { background: var(--color-primary); }
+.team-glyph--cobalt { background: #1B2CC1; }
+/* The glyph PNGs are near-black; black on cobalt barely reads, so the cobalt
+   card shows it in cream, as on the brand's cobalt billboard. */
+.team-glyph--cobalt img { filter: invert(1) brightness(1.1); }
