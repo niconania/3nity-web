@@ -559,3 +559,29 @@
 .wpr-services-area {
   overflow-x: clip;
 }
+
+/* Caption cards, continued (2026-10-04, second featured piece): a slide
+   without the blog button is shorter than one with it, which left a strip
+   of bare slider background under it (a grey band on phones). Stretch every
+   card to the tallest — the fade slides share one flex row — and let .top
+   fill it, so Agenio's border-bottom stays at the card's edge. */
+.wpr-testimonials-area .section-inner .testimonials-content-slider .swiper-slide {
+  height: auto;
+}
+.wpr-testimonials-area .section-inner .testimonials-content-slider .testimonials-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.wpr-testimonials-area .section-inner .testimonials-content-slider .testimonials-content .top {
+  flex: 1 0 auto;
+}
+/* Phones: the card is full width there, and Agenio's prev/next pair
+   (bottom-right, 56px tall since our resize above) ran into the end of the
+   "Leer el caso completo" button. Reserve the arrows' row under the text,
+   only when the arrows exist (not rendered for a single piece). */
+@media (max-width: 576px) {
+  .wpr-testimonials-area .section-inner:has(.swiper-navigation) .testimonials-content-slider .testimonials-content .top {
+    padding-bottom: calc(56px + 24px);
+  }
+}

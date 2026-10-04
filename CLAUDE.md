@@ -102,7 +102,15 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
     va en `fotos-nuevas/` (gitignored), se comprime a
     `public/work/featured/trabajo-0N.webp` (1280×960, ≤200KB) y se agrega una
     entrada a `WORK_SLIDES`. Con 1 sola slide no se renderizan las flechas y
-    `main.js` desactiva loop/autoplay (ver abajo).
+    `main.js` desactiva loop/autoplay (ver abajo). `trabajo-02.webp`
+    (Polytech) salió del post de Instagram del estudio porque no había
+    original: la versión embebible del post
+    (`instagram.com/p/<código>/embed/captioned/`, pedida con User-Agent
+    `facebookexternalhit/1.1`) trae en su JSON (`contextJSON`) las fotos y
+    videos del carrusel a la resolución que guarda Instagram (~1080px) y el
+    texto del post. Los archivos quedaron en `fotos-nuevas/polytech/`. Es un
+    recorte de 692px de la foto de producto dentro del collage: reemplazar
+    por el original si aparece.
 - **SplitText de GSAP** (usado en el efecto de scroll de "Our Vision") es un
   plugin de pago de Club GreenSock, licenciado al autor del template, no a
   nosotros. Se sustituyó por `public/vendor/js/splittext-shim.js`, que
