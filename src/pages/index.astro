@@ -122,6 +122,12 @@ const FAQS = [
   { q: "¿Hacen envíos fuera de la ciudad?", a: "Sí, coordinamos envío nacional. El costo se incluye en la cotización." },
   { q: "¿Hacen piezas personalizadas o solo venden al mayor?", a: "Piezas personalizadas — trabajamos igual de bien una unidad única, una serie corta o un prototipo." },
 ];
+
+// "Lo viste en MakerWorld" (Agenio's "THE DIFFERENCE" section). The studio
+// checks each model's license before quoting — see CLAUDE.md.
+const MAKERWORLD_COLLECTION = "https://makerworld.com/es/collections/36855492-explore-what-you-can-do";
+const MAKERWORLD_YOU = ["Copia el link de su página", "Pégalo en el formulario"];
+const MAKERWORLD_US = ["Revisamos la licencia del modelo", "Te cotizamos por correo en 24–48 h", "Lo imprimimos y coordinamos la entrega"];
 ---
 
 <Base>
@@ -550,6 +556,74 @@ const FAQS = [
   </section>
   <!-- wpr testimonials area end -->
 
+  <!-- wpr why choose us area start (repurposed: MakerWorld → quote, see CLAUDE.md) -->
+  <section id="makerworld" class="wpr-why-choose-us-area mb--16">
+    <div class="container">
+      <div class="section-inner bg-white border-1">
+        <div class="bottom-shape-area square-dot">
+          <img src="/vendor/images/about/shape-02.svg" alt="" />
+          <span class="square-shape top-left"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+        <div class="wpr-content-area border-1">
+          <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+              <div class="content-inner">
+                <div class="section-title-area center-style">
+                  <p class="sub-title">PRINT ANY MODEL</p>
+                  <h2 class="section-title second-font font-semi-bold text-normal wpr-text-anime-style-1">¿Lo viste en MakerWorld? <br> Te lo imprimimos</h2>
+                </div>
+                <div class="row g-5">
+                  <div class="col-lg-6 col-md-6">
+                    <div class="why-choose-wrapper ml-auto">
+                      <div class="wrapper-header">
+                        <h3 class="title second-font font-semi-bold text-normal">Tú <span>eliges</span></h3>
+                        <img src="/vendor/images/why-choose/grid.svg" alt="" class="shape" />
+                      </div>
+                      <ul class="wrapper-list two">
+                        <li><img src="/vendor/images/why-choose/check-02.svg" alt="" /><span>Elige un modelo en <a href={MAKERWORLD_COLLECTION} target="_blank" rel="noopener noreferrer">MakerWorld</a></span></li>
+                        {MAKERWORLD_YOU.map((item) => (
+                          <li><img src="/vendor/images/why-choose/check-02.svg" alt="" />{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <div class="why-choose-wrapper">
+                      <div class="wrapper-header two">
+                        <div class="logo">3nity<sup>™</sup></div>
+                        <img src="/vendor/images/why-choose/grid.svg" alt="" class="shape" />
+                      </div>
+                      <ul class="wrapper-list two">
+                        {MAKERWORLD_US.map((item) => (
+                          <li><img src="/vendor/images/why-choose/check-02.svg" alt="" />{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="bottom-button-area">
+                  <a href="#contact" class="wpr-btn btn-primary" data-quote-makerworld>Cotizar un modelo</a>
+                  <p class="desc makerworld-ideas">¿Sin ideas? <a href={MAKERWORLD_COLLECTION} target="_blank" rel="noopener noreferrer">Explora lo que se puede imprimir en MakerWorld ↗</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-shape-area square-dot">
+          <img src="/vendor/images/about/shape-02.svg" alt="" />
+          <span class="square-shape top-left"></span>
+          <span class="square-shape bottom-left"></span>
+          <span class="square-shape top-right"></span>
+          <span class="square-shape bottom-right"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wpr why choose us area end -->
+
   <!-- wpr faq area start -->
   <section class="wpr-faq-area mb--16">
     <div class="container">
@@ -710,6 +784,18 @@ const FAQS = [
         end: "top top",
         scrub: true,
       },
+    });
+  });
+</script>
+
+<script>
+  // "Cotizar un modelo" (MakerWorld section): preselect the project type so
+  // the visitor lands on a form already set up for a model link. No focus():
+  // on phones it would pop the keyboard mid smooth-scroll.
+  document.querySelectorAll("[data-quote-makerworld]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const select = document.getElementById("project_type") as HTMLSelectElement | null;
+      if (select) select.value = "makerworld";
     });
   });
 </script>
