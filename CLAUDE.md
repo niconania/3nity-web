@@ -23,6 +23,10 @@ Objetivo de conversión: que el visitante envíe una solicitud de cotización po
   sale del **panel de Web3Forms** (`app.web3forms.com`, cuenta
   3nityccs@gmail.com, formulario "My First Form"). El alta por correo desde
   web3forms.com nunca entregó la clave a esa dirección; el panel sí funcionó.
+  Para probar el envío con un navegador automático (Playwright), usar un
+  User-Agent normal: Web3Forms bloquea `HeadlessChrome` (responde sin
+  cabecera CORS y la web muestra "No se pudo enviar" aunque el formulario
+  funcione). Verificado de punta a punta el 2026-10-04 desde la web publicada.
 - `site` en `astro.config.mjs` = URL de producción; `Base.astro` lo usa para
   `og:image` (`public/og-image.jpg`, 1200×630, hecha del wordmark de marca) y
   `og:url`. Actualizarlo si llega dominio propio.
