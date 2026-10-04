@@ -126,16 +126,22 @@
 
       $(document).ready(function () {
 
+        // 3NITY: with a single featured piece, Swiper 8's loop mode clones
+        // that one slide and autoplay keeps sliding the photo into its own
+        // copy every 5s. Loop/autoplay only with 2+ slides (2026-10-04, see
+        // CLAUDE.md).
+        var hasMultipleWorks = $(".testimonials-image-slider .swiper-slide").length > 1;
+
         var imageSwiper = new Swiper(".testimonials-image-slider", {
           slidesPerView: 1,
           slidesPerGroup: 1,
           spaceBetween: 0,
           speed: 1800,
-          loop: true,
-          autoplay: {
+          loop: hasMultipleWorks,
+          autoplay: hasMultipleWorks ? {
             delay: 5000, // 3NITY: Agenio ships 1000ms, too fast to read a caption (2026-07-21)
             disableOnInteraction: false
-          },
+          } : false,
           navigation: {
             nextEl: ".swiper-btn-next",
             prevEl: ".swiper-btn-prev",
@@ -147,7 +153,7 @@
           spaceBetween: 0,
           effect: 'fade',
           speed: 1800,
-          loop: true,
+          loop: hasMultipleWorks,
           autoplay: false,
           fadeEffect: {
             crossFade: true

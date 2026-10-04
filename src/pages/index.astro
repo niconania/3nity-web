@@ -60,19 +60,16 @@ const TEAM = [
   { name: "Nicola A. Nania", role: "Chief Technology Officer" },
 ];
 
-const WORK_SLIDES = [
+// Only real pieces with real photos (CLAUDE.md: no fabricated content). To
+// add one, compress the original to public/work/featured/trabajo-0N.webp
+// (1280x960, ≤200KB) and append an entry here; blogSlug is optional.
+const WORK_SLIDES: { title: string; desc: string; photo: string; blogSlug?: string }[] = [
   {
     title: "Productos a gran escala",
     desc: "CLIENTE — JMEDICAL & FILLMED. Modelamos, imprimimos y rotulamos envases referenciales a sus productos estrella.",
     photo: "trabajo-01.webp",
     blogSlug: "productos-a-gran-escala",
   },
-  ...Array.from({ length: 5 }, (_, i) => ({
-    title: `Pieza / ${String(i + 2).padStart(2, "0")}`,
-    desc: "Foto pendiente — próximamente en esta galería.",
-    photo: null,
-    blogSlug: undefined as string | undefined,
-  })),
 ];
 
 const VISION_PROJECTS = [
@@ -502,11 +499,7 @@ const FAQS = [
             {WORK_SLIDES.map((w) => (
               <div class="swiper-slide">
                 <div class="image-area">
-                  {w.photo ? (
-                    <img src={`/work/featured/${w.photo}`} alt={w.title} />
-                  ) : (
-                    <div class="photo-placeholder" style="width:100%;height:100%;">{w.title}</div>
-                  )}
+                  <img src={`/work/featured/${w.photo}`} alt={w.title} />
                 </div>
               </div>
             ))}
@@ -529,14 +522,16 @@ const FAQS = [
             ))}
           </div>
         </div>
-        <div class="swiper-navigation">
-          <div class="swiper-btn swiper-btn-prev">
-            <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6094 0L0.859375 13.75L0 14.6484L0.859375 15.5469L14.6094 29.2969L16.4062 27.5L3.55469 14.6484L16.4062 1.79688L14.6094 0Z" fill="#F9FAFB"></path></svg>
+        {WORK_SLIDES.length > 1 && (
+          <div class="swiper-navigation">
+            <div class="swiper-btn swiper-btn-prev">
+              <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6094 0L0.859375 13.75L0 14.6484L0.859375 15.5469L14.6094 29.2969L16.4062 27.5L3.55469 14.6484L16.4062 1.79688L14.6094 0Z" fill="#F9FAFB"></path></svg>
+            </div>
+            <div class="swiper-btn swiper-btn-next">
+              <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.79688 0L0 1.79688L12.8516 14.6484L0 27.5L1.79688 29.2969L15.5469 15.5469L16.4062 14.6484L15.5469 13.75L1.79688 0Z" fill="#F9FAFB"></path></svg>
+            </div>
           </div>
-          <div class="swiper-btn swiper-btn-next">
-            <svg width="17" height="30" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.79688 0L0 1.79688L12.8516 14.6484L0 27.5L1.79688 29.2969L15.5469 15.5469L16.4062 14.6484L15.5469 13.75L1.79688 0Z" fill="#F9FAFB"></path></svg>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   </section>
