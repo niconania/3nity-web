@@ -1,10 +1,12 @@
 // Site-wide contact details, centralized so they're consistent everywhere
 // they're rendered (footer, contact form, meta tags).
+const instagramHandle = "trinityve_";
+
 export const site = {
   name: "3NITY",
   email: "3nityccs@gmail.com",
-  // TODO: reemplazar con el Instagram real del estudio.
-  instagram: "https://instagram.com/3nity.studio",
-  // TODO: reemplazar con el LinkedIn real del estudio.
-  linkedin: "https://linkedin.com/company/3nity",
+  instagram: `https://instagram.com/${instagramHandle}`,
+  instagramHandle: `@${instagramHandle}`,
+  // No LinkedIn: the previous URL was a placeholder, not a real page. Add it
+  // back only if the studio creates one (see CLAUDE.md — qué NO hacer).
 };
