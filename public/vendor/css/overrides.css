@@ -532,3 +532,30 @@
 /* The glyph PNGs are near-black; black on cobalt barely reads, so the cobalt
    card shows it in cream, as on the brand's cobalt billboard. */
 .team-glyph--cobalt img { filter: invert(1) brightness(1.1); }
+
+/* Contact email on phones: Agenio sets these links to a flat 30px below
+   991px. "3nityccs@gmail.com" is ~11em wide, so at 30px (325px) it overflows
+   its column on any phone narrower than ~420px — on 360px Androids it pushed
+   the whole page into horizontal scroll (found 2026-10-04). Scale it with
+   the column instead (the column is ~100vw - 90px at these widths), capped
+   at Agenio's 30px; overflow-wrap is only a safety net if the address ever
+   gets longer than the ~11em this is sized for. */
+@media (max-width: 991px) {
+  .wpr-contact-area .section-inner .left-content-area .get-in-touch ul li a {
+    font-size: min(30px, calc((100vw - 90px) / 11));
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Services heading on small phones: Agenio's splitText() (main.js) parks
+   every char of .wpr-text-anime-style-1 at x:50px until the heading scrolls
+   into view. On viewports ≤375px the last chars of "Imprimimos." then sit
+   past the screen edge, and since <body> is .overflow-x-visible (Agenio's
+   own choice, for its pinned/sticky effects) the whole page could be swiped
+   sideways until the animation fired (found 2026-10-04). Clip horizontal
+   overflow on this section only — `clip`, unlike `hidden`, doesn't create a
+   scroll container, so it can't interfere with sticky/pinned scrolling.
+   The chars now slide in from the screen edge instead. */
+.wpr-services-area {
+  overflow-x: clip;
+}
