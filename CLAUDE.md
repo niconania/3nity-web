@@ -14,7 +14,14 @@ Objetivo de conversión: que el visitante envíe una solicitud de cotización po
 - Deploy: Cloudflare Pages / Vercel (estático) — en producción, Vercel
   (`https://3nity-web.vercel.app/`), deploy automático al pushear a `main`.
 - Formulario: Web3Forms (POST vía fetch + honeypot antispam). El access key vive en
-  variable de entorno pública `PUBLIC_W3F_KEY` (ver `.env.example`).
+  variable de entorno pública `PUBLIC_W3F_KEY` (ver `.env.example`). **En Vercel es
+  obligatoria**: `index.astro` hace fallar el build si corre en Vercel sin la clave
+  (2026-10-04 — la web estuvo publicada con `access_key` vacío y ningún envío
+  llegaba). Un build fallido deja online el deploy anterior; builds locales sin
+  `.env` compilan igual.
+- `site` en `astro.config.mjs` = URL de producción; `Base.astro` lo usa para
+  `og:image` (`public/og-image.jpg`, 1200×630, hecha del wordmark de marca) y
+  `og:url`. Actualizarlo si llega dominio propio.
 
 ## Sistema visual — v3: puerto literal del template Agenio
 El usuario probó dos direcciones intermedias (reinterpretar el look de Agenio con
@@ -83,6 +90,19 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
     hace falta el hack de `aspect-ratio` — solo el reset `img{max-width:100%;
     height:auto}` de Agenio no cubre `<video>`, así que ese reset se repite a
     mano en `overrides.css` para `.working-process-wrapper .image-area video`.
+  - **Equipo — glifos de marca (2026-10-04)**: sin retratos todavía, las 3
+    tarjetas de `#team` muestran un glifo píxel de 3NITY sobre el color de
+    cada socio (`.team-glyph` en `overrides.css`, PNGs en
+    `public/brand/glyphs/`, copiados de `.claude/skills/3nity-design/brand/`):
+    Sara/magenta, José/lima, Nicola/cobalto — mismas parejas que los 3
+    carteles de marca. Placeholder de marca, no contenido inventado; se
+    reemplaza por `<img>` cuando haya fotos.
+  - **Trabajos destacados — solo piezas reales (2026-10-04)**: se quitaron las
+    slides "Pieza / 0N — Foto pendiente". Para agregar una pieza: el original
+    va en `fotos-nuevas/` (gitignored), se comprime a
+    `public/work/featured/trabajo-0N.webp` (1280×960, ≤200KB) y se agrega una
+    entrada a `WORK_SLIDES`. Con 1 sola slide no se renderizan las flechas y
+    `main.js` desactiva loop/autoplay (ver abajo).
 - **SplitText de GSAP** (usado en el efecto de scroll de "Our Vision") es un
   plugin de pago de Club GreenSock, licenciado al autor del template, no a
   nosotros. Se sustituyó por `public/vendor/js/splittext-shim.js`, que
@@ -111,18 +131,21 @@ No hay tokens `--tn-*` ni componentes `.astro` reutilizables por sección; hay
 - **Wordmark**: el logo de Agenio (`assets/images/logo/01.svg`) se reemplazó por
   el texto `3nity™`. Desde 2026-07-19 sí usa la fuente píxel de la identidad
   3NITY (`That That New Pixel`, corte itálico) — ver "Fuentes de marca" arriba.
-- **`main.js` — único hand-edit al JS de Agenio (2026-07-21)**: el swiper
+- **`main.js` — hand-edits al JS de Agenio (2026-07-21, 2026-10-04)**: el swiper
   `.testimonials-image-slider` de "Trabajos destacados" traía `autoplay:
   {delay: 1000}` — pasaba de foto cada 1 segundo, insuficiente para leer el
   título/descripción de cada pieza. Es un valor de configuración inline
   dentro de la llamada a `new Swiper(...)`, no una regla de CSS que se pueda
   sobreescribir desde `overrides.css` ni algo expuesto globalmente para
   reconfigurar desde otro script — se cambió a mano a `delay: 5000` (línea
-  ~136), con un comentario in-situ marcando el valor original de Agenio. Es
-  la única línea de `main.js` que no es una copia literal del template;
-  cualquier otro ajuste de comportamiento de JS debería seguir el mismo
-  patrón (edit mínimo, comentado, documentado acá) en vez de acumularse
-  silenciosamente.
+  ~142), con un comentario in-situ marcando el valor original de Agenio.
+  Segundo edit (2026-10-04), en ese mismo bloque: `loop`/`autoplay` de los
+  dos swipers de Trabajos solo se activan con 2+ slides (`hasMultipleWorks`)
+  — con una sola pieza, el loop de Swiper 8 clona la slide y el autoplay
+  deslizaba la foto hacia su propia copia cada 5s. Son las únicas líneas de
+  `main.js` que no son copia literal del template; cualquier otro ajuste de
+  comportamiento de JS debería seguir el mismo patrón (edit mínimo,
+  comentado, documentado acá) en vez de acumularse silenciosamente.
 
 ### Módulo de blog (2026-08-07)
 Un artículo por trabajo real, enlazado desde "Trabajos destacados". Sigue
@@ -210,3 +233,8 @@ versionada en el repo:
   Clesmont, That That New Pixel) sí están en uso — copiados a `public/fonts/`
   y cargados vía `@font-face` en `overrides.css` (ver arriba). Si el usuario
   trae cortes/pesos nuevos de esas fuentes, van en esa misma carpeta origen.
+  Lo mismo con los glifos de `brand/`: copiados a `public/brand/glyphs/`
+  para las tarjetas de Equipo (ver "Equipo — glifos de marca").
+- No poner links de redes inventados: solo cuentas reales (Instagram:
+  `@trinityve_`, en `src/config.ts`). LinkedIn se quitó porque era un
+  placeholder; se agrega solo si el estudio crea una página real.
