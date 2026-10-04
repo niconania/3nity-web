@@ -547,16 +547,18 @@
   }
 }
 
-/* Services heading on small phones: Agenio's splitText() (main.js) parks
-   every char of .wpr-text-anime-style-1 at x:50px until the heading scrolls
-   into view. On viewports ≤375px the last chars of "Imprimimos." then sit
-   past the screen edge, and since <body> is .overflow-x-visible (Agenio's
-   own choice, for its pinned/sticky effects) the whole page could be swiped
-   sideways until the animation fired (found 2026-10-04). Clip horizontal
-   overflow on this section only — `clip`, unlike `hidden`, doesn't create a
-   scroll container, so it can't interfere with sticky/pinned scrolling.
-   The chars now slide in from the screen edge instead. */
-.wpr-services-area {
+/* Split-text headings on phones: Agenio's splitText() (main.js) parks every
+   char of .wpr-text-anime-style-1 at x:50px until the heading scrolls into
+   view. On phone widths the last chars of a line then sit past the screen
+   edge ("Imprimimos." in Services at ≤375px, the MakerWorld title at 390px),
+   and since <body> is .overflow-x-visible (Agenio's own choice, for its
+   pinned/sticky effects) the whole page could be swiped sideways until the
+   animation fired (found 2026-10-04). Clip horizontal overflow on just the
+   sections that use it — `clip`, unlike `hidden`, doesn't create a scroll
+   container, so it can't interfere with sticky/pinned scrolling. The chars
+   now slide in from the screen edge instead. */
+.wpr-services-area,
+.wpr-why-choose-us-area {
   overflow-x: clip;
 }
 
@@ -584,4 +586,25 @@
   .wpr-testimonials-area .section-inner:has(.swiper-navigation) .testimonials-content-slider .testimonials-content .top {
     padding-bottom: calc(56px + 24px);
   }
+}
+
+/* MakerWorld section (Agenio's "THE DIFFERENCE", 2026-10-04): the second
+   card's header held Agenio's logo <img> (~160px wide); our text wordmark at
+   the global .logo size (26px) looked lost in that 104px-tall box. Links
+   inside the lists and the "¿Sin ideas?" line need to read as links (Agenio
+   never put any there), and that line sits centered under the single button
+   instead of flush left against it. */
+.why-choose-wrapper .wrapper-header.two .logo {
+  font-size: 32px;
+  color: var(--color-heading-1);
+}
+.why-choose-wrapper .wrapper-list li a,
+.wpr-why-choose-us-area .makerworld-ideas a {
+  color: var(--color-heading-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.wpr-why-choose-us-area .wpr-content-area .content-inner .bottom-button-area .makerworld-ideas {
+  margin: 28px 0 0;
+  text-align: center;
 }
