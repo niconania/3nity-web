@@ -18,7 +18,11 @@ Objetivo de conversión: que el visitante envíe una solicitud de cotización po
   obligatoria**: `index.astro` hace fallar el build si corre en Vercel sin la clave
   (2026-10-04 — la web estuvo publicada con `access_key` vacío y ningún envío
   llegaba). Un build fallido deja online el deploy anterior; builds locales sin
-  `.env` compilan igual.
+  `.env` compilan igual. Desde 2026-10-04 la clave está en Vercel (proyecto
+  `3nity-web`, cuenta `niconania1`, Production + Preview + Development) y
+  sale del **panel de Web3Forms** (`app.web3forms.com`, cuenta
+  3nityccs@gmail.com, formulario "My First Form"). El alta por correo desde
+  web3forms.com nunca entregó la clave a esa dirección; el panel sí funcionó.
 - `site` en `astro.config.mjs` = URL de producción; `Base.astro` lo usa para
   `og:image` (`public/og-image.jpg`, 1200×630, hecha del wordmark de marca) y
   `og:url`. Actualizarlo si llega dominio propio.
