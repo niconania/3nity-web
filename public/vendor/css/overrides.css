@@ -485,3 +485,21 @@
   height: 20px;
 }
 
+/* "Trabajos destacados" caption card: Agenio fixes .top at 244px (200px at
+   991-1200px) — sized for its testimonials, which are only a title + quote.
+   Ours also carries the "Leer el caso completo" button (blog module,
+   2026-08-07), which didn't fit: it hung half outside the dark card, pressed
+   against the bottom edge of the section (found 2026-10-04). Let the card
+   grow with its content instead, keeping Agenio's heights as the minimum.
+   Swiper's fade slides share one row, so every card still matches the
+   tallest one and the fade doesn't jump. */
+.wpr-testimonials-area .section-inner .testimonials-content-slider .testimonials-content .top {
+  height: auto;
+  min-height: 244px;
+}
+@media (max-width: 1200px) and (min-width: 991px) {
+  .wpr-testimonials-area .section-inner .testimonials-content-slider .testimonials-content .top {
+    min-height: 200px;
+  }
+}
+
